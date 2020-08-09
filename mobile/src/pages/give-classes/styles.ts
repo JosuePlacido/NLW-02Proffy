@@ -3,41 +3,77 @@ import {StyleSheet} from 'react-native';
 const styles = StyleSheet.create({
     container:{
         flex:1,
-        backgroundColor:'#8257e5',
-        justifyContent:"center",
-        padding:40
+        backgroundColor:'#f0f0f7'
     },
-    content:{
-        flex:1,
-        justifyContent:'center'
+    formClass:{
+        marginTop:-40,
+        backgroundColor:'#fff',
+        marginHorizontal:18,
+        borderWidth:1,
+        borderColor:'#e6e6f0',
+        borderRadius:8,
+        marginBottom:16,
+        overflow:"hidden"
     },
-    title:{
+    searchForm:{
+        marginBottom:24
+    },
+    inputGroup:{
+        flexDirection:'row',
+        justifyContent:'space-between',
+    },
+    submitButton:{        
+        backgroundColor:'#04d361',
+        flexDirection:'row',
+        height:56,
+        borderRadius:8,
+        justifyContent:'center',
+        alignItems:'center'
+    },
+    submitButtonText:{
         fontFamily:'Archivo_700Bold',
         color:'#fff',
-        fontSize:32,
-        lineHeight:37,
-        maxWidth:180,
-    },
-    description: {
-        marginTop:24,
-        color:'#d4c2ff',
-        fontSize: 16,
-        lineHeight:26,
-        fontFamily:'Poppins_400Regular',
-        maxWidth: 240
-    },
-    button:{
-        marginVertical:40,
-        backgroundColor:'#04d361',
-        height:58,
-        alignItems:'center',
-        justifyContent:'center',
-        borderRadius:8
-    },
-    buttonText:{
-        fontFamily:'Archivo_700Bold',
-        color:"#fff",
         fontSize:16
+    },
+    description:{
+        fontFamily:'Poppins_400Regular',
+        color:'#f4c2ff',
+        marginBottom:30
+    },
+    buttonNovo:{
+        color:'#8257E5'
+    },
+    footer:{
+        borderTopWidth:1,
+        borderColor:'#e6e6f0',
+        padding:20,
+        margin:-20
+    },
+    footerWarn:{        
+        flexDirection:'row',
+        alignItems:'center',
+        justifyContent:'space-evenly',
+        padding:16
+    },
+    textFooter:{
+        fontFamily:'Poppins_400Regular',
+        fontSize:14,
+        lineHeight:25,
+        color:'#A0A0B2'
+    },
+    textFooterWarn:{
+        color:'#8257E5',
+        width:'100%'
+    },
+    image:{
+        height:40,
+        width:40
+    },
+    inputGroupInline:{
+        flexDirection:'row',
+        justifyContent:'space-between',
+    },subGroup:{
+        width:"48%"
     }
 });
 

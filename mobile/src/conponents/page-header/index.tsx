@@ -24,9 +24,9 @@ const PageHeader:React.FC<PageHeaderProps> = ({title,headerRight,children}) => {
             </View>
             <View style={styles.header}>
                 <Text style={styles.title}>
-                    {title}
+                    {title}    
                 </Text>
-                {headerRight}
+                {headerRight}  
             </View>
             {children}
         </View>
