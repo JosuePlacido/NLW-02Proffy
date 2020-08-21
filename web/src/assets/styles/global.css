@@ -17,6 +17,7 @@
     --color-button-text: #FFFFFF;
     --color-box-base: #FFFFFF;
     --color-box-footer: #FAFAFC;
+    --color-button-background: #DCDCE5;
   
     font-size: 60%;
   }
@@ -31,11 +32,6 @@
   }
   body{
       background: var(--color-background);
-  }
-  #root{
-      display: flex;
-      align-items: center;
-      justify-content: center;
   }
 
   body,input,textarea,button {

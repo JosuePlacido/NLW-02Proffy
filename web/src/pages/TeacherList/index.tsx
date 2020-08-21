@@ -1,8 +1,7 @@
 import React, { useState, FormEvent } from 'react';
 import './styles.css';
 import PageHeader from '../../components/page-header';
-import Input from '../../components/input';
-import Select from '../../components/select';
+import Input,{ Select } from '../../components/input';
 import TeacherItem,{ Teacher } from '../../components/teacherItem';
 import api from '../../services/api';
 function TeacherList(){
