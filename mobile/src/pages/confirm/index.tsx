@@ -1,11 +1,13 @@
 import React from 'react';
 import { Text, View, Image,TouchableOpacity, ImageBackground } from 'react-native';
 import GivaClassesBgImg from '../../assets/images/give-classes-background.png';
-import styles from './styles';
-import { RectButton } from 'react-native-gesture-handler';
-import { useNavigation,StackRouterOptions, RouteProp } from '@react-navigation/native';
-import { StackNavigationProp } from '@react-navigation/stack';
-import { Ionicons, Feather } from '@expo/vector-icons';
+import styles,{ Title,Description } from './styles';
+import {ButtonPrimary,TextLight} from '../../assets/styles/buttons';
+import {ContainerPrimary} from '../../assets/styles/views';
+import {} from '../../assets/styles/texts';
+import {Background} from '../../assets/styles/images';
+import { useNavigation} from '@react-navigation/native';
+import { Ionicons } from '@expo/vector-icons';
 
 type Params = { name: string,description:string };
 
@@ -20,15 +22,15 @@ ScreenProps
         navigation.navigate('StudyTabs');
     }
     return (
-        <View style={styles.container}>
-            <ImageBackground resizeMode="contain" style={styles.content} source={GivaClassesBgImg}>                
+        <ContainerPrimary>
+            <Background resizeMode="contain" source={GivaClassesBgImg}>                
                 <Ionicons name="ios-checkmark" style={styles.icon} size={70} />
-                <Text style={styles.title}>{props.route.params.title}</Text>
-                <Text style={styles.description}>{props.route.params.description}</Text>
-            </ImageBackground>
-            <RectButton style={styles.button} onPress={handleNavigateBack}>
-                <Text style={styles.buttonText}>Tudo bem</Text>
-            </RectButton>
-        </View>
+                <Title>{props.route.params.title}</Title>
+                <Description>{props.route.params.description}</Description>
+            </Background>
+            <ButtonPrimary onPress={handleNavigateBack}>
+                <TextLight>Tudo bem</TextLight>
+            </ButtonPrimary>
+        </ContainerPrimary>
     );
 }

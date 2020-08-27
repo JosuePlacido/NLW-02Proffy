@@ -1,27 +1,16 @@
-import {StyleSheet} from 'react-native';
+import styled from 'styled-components/native';
 
-const styles = StyleSheet.create({
-    container:{
-        padding:0
-    },
-    label:{
-        color:'#9C98A6',
-        fontFamily:'Poppins_400Regular'
-    },
-    pickerPanel:{
-        height:54,
-        backgroundColor:'#fafAFC',
-        borderColor:'#E6E6F0',
-        justifyContent:'center',
-        paddingLeft:5,
-        marginTop:4,
-        borderWidth:1,
-        marginBottom:16,
-        borderRadius:8
-    },
-    picker:{
-        color:'#6A6180'
-    }
-});
-
-export default styles;
+export const PickerPanel = styled.View`
+    height:54px;
+    background-color:#fafAFC;
+    border-color:#E6E6F0;
+    justify-content:center;
+    padding-left:5px;
+    margin-top:4px;
+    border-width:1px;
+    margin-bottom:16px;
+    border-radius:8;
+`;
+export const PickerStyled = styled.Picker`
+    color:#6A6180;
+`;

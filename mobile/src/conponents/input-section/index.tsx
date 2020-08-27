@@ -1,6 +1,5 @@
 import React, { ReactNode } from 'react';
-import { View,Image,Text } from 'react-native';
-import styles from './styles';
+import { ViewHeader,ViewContainer,TextTitle } from './styles';
 
 interface SectionProps{
     title:string;
@@ -9,15 +8,15 @@ interface SectionProps{
 
 const InputSection:React.FC<SectionProps> = ({title,right,children}) => {
     return (
-        <View style={styles.container}>  
-            <View style={styles.header}>
-                <Text style={styles.title}>
+        <ViewContainer>  
+            <ViewHeader>
+                <TextTitle>
                     {title}    
-                </Text>
+                </TextTitle>
                 {right}  
-            </View>
+            </ViewHeader>
             {children}
-        </View>
+        </ViewContainer>
     );
 }
 export default InputSection;

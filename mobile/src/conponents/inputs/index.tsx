@@ -1,44 +1,47 @@
 import React, { ReactNode, Component } from 'react';
 import { View,Image,Text, TextInput } from 'react-native';
-import styles from './styles';
-import stylesTextArea from './stylesTextArea';
+import {ViewCondensed,TextInputDefault,Label,TextAreaDefault,
+  TextInputCondensed,LabelCondensed} from './styles';
 
 export interface InputProps extends TextInput {
     label:string;
 }
-export default class InputDefault extends React.Component<InputProps,{}> {
-    constructor(props: any) {
-      super(props);
-    }
-  
-    render() {
-      return (
-        <View style={styles.container}>
-            <Text style={styles.label}>{this.props.label}</Text>
-            <TextInput style={styles.input} 
-            placeholderTextColor="#c1bccc"
-            {...this.props}/>
-        </View>
-      );
-    }
+ const InputDefault:React.FC<InputProps> = ({label,...rest}) => {
+    return (
+      <View>
+          <Label>{label}</Label>
+          <TextInputDefault 
+          selectionColor={'#8257e5'}
+          placeholderTextColor="#c1bccc"
+          {...rest}/>
+      </View>
+    );
   }
-  export class TextArea extends React.Component<InputProps,{}> {
-    constructor(props: any) {
-      super(props);
-    }
-  
-    render() {
-      return (
-        <View style={styles.container}>
-            <Text style={styles.label}>{this.props.label}</Text>
-            <TextInput style={stylesTextArea.input} 
+  export default InputDefault;
+  export const TextArea:React.FC<InputProps> = ({label,...rest}) => {
+    return (
+      <View>
+          <Label>{label}</Label>
+          <TextAreaDefault 
+            selectionColor={'#8257e5'}
             placeholderTextColor="#c1bccc"
             multiline={true}
             numberOfLines={10}
-            {...this.props}/>
-        </View>
-      );
-    }
+            {...rest}/>
+      </View>
+    );
+  }
+
+  export const InputCondensed:React.FC<InputProps> = ({label,...rest}) =>{
+    return (
+      <ViewCondensed>
+        <LabelCondensed>{label}</LabelCondensed>
+        <TextInputCondensed 
+          selectionColor={'#8257e5'}
+          placeholderTextColor="#c1bccc"
+          {...rest}/>
+      </ViewCondensed>
+    );
   }
 /*interface InputProps extends TextInput {
     label:string;

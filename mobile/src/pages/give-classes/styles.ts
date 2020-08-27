@@ -1,10 +1,6 @@
 import {StyleSheet} from 'react-native';
 
 const styles = StyleSheet.create({
-    container:{
-        flex:1,
-        backgroundColor:'#f0f0f7'
-    },
     formClass:{
         marginTop:-40,
         backgroundColor:'#fff',
@@ -22,23 +18,10 @@ const styles = StyleSheet.create({
         flexDirection:'row',
         justifyContent:'space-between',
     },
-    submitButton:{        
-        backgroundColor:'#04d361',
-        flexDirection:'row',
-        height:56,
-        borderRadius:8,
-        justifyContent:'center',
-        alignItems:'center'
-    },
     submitButtonText:{
         fontFamily:'Archivo_700Bold',
         color:'#fff',
         fontSize:16
-    },
-    description:{
-        fontFamily:'Poppins_400Regular',
-        color:'#f4c2ff',
-        marginBottom:30
     },
     buttonNovo:{
         color:'#8257E5'

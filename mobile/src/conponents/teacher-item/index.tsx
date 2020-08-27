@@ -1,14 +1,17 @@
 import React, { useState } from 'react';
-import {View,Image,Text, Linking} from 'react-native';
-
-import styles from './styles';
+import {View,Image,Text, Linking,TouchableOpacity} from 'react-native';
+import {ViewProfileInfo,Bio,Price,PriceValue,FavoriteButton,ContactButton} from './styles';
 import { RectButton } from 'react-native-gesture-handler';
 import heartIcon from '../../assets/images/icons/heart-outline.png';
 import unfavorite from '../../assets/images/icons/unfavorite.png';
 import whatsAppIcon from '../../assets/images/icons/whatsapp.png';
 import api from '../../services/api';
 import AsyncStorage from '@react-native-community/async-storage';
-
+import { Title,ItemSubTitle } from '../../assets/styles/texts';
+import { TextLightWithICon } from '../../assets/styles/buttons';
+import { Avatar } from '../../assets/styles/images';
+import { ContainerItem,ViewHorizontalCenterPadding,ItemFooter
+    ,ViewHorizontalCenter } from '../../assets/styles/views';
 export interface Teacher {
     id: number;
     avatar: string;
@@ -51,35 +54,33 @@ const TeacherItem:React.FC<TeacherItemProps>= ({teacher,favorited}) => {
     }
 
     return (
-        <View style={styles.container}>
-            <View style={styles.profile}>
-                <Image style={styles.avatar}
-                   source={{ uri:teacher.avatar}}
-                   />
-                   <View style={styles.profileInfo}>
-                        <Text style={styles.name}>{teacher.name}</Text>
-                        <Text style={styles.subject}>{teacher.subject}</Text>
-                   </View>
-            </View>
-            <Text style={styles.bio}>
+        <ContainerItem>
+            <ViewHorizontalCenterPadding>
+                <Avatar source={{ uri:teacher.avatar}}/>
+                <ViewProfileInfo>
+                    <Title>{teacher.name}</Title>
+                    <ItemSubTitle>{teacher.subject}</ItemSubTitle>
+                </ViewProfileInfo>
+            </ViewHorizontalCenterPadding>
+            <Bio>
                 {teacher.bio}
-            </Text>
-            <View style={styles.footer}>
-                <Text style={styles.price}>
-                    Preçi/hora{'    '}
-                    <Text style={styles.priceValue}>R$ {teacher.cost}</Text>
-                </Text>
-                <View style={styles.buttonsContainer}>
-                    <RectButton onPress={handleFavorite} style={[styles.favoriteButton,isFavorited?styles.favorited:{}]}>
+            </Bio>
+            <ItemFooter>
+                <Price>
+                    Preço/hora{'    '}
+                    <PriceValue>R$ {teacher.cost}</PriceValue>
+                </Price>
+                <ViewHorizontalCenter>
+                    <FavoriteButton onPress={handleFavorite} backgroundColor={isFavorited?'#e33d3d':'#8557e5'}>
                         {isFavorited?<Image source={unfavorite}/>:<Image source={heartIcon}/> }
-                    </RectButton>
-                    <RectButton style={styles.contactButton} onPress={handleLinkToWhatsApp}>
+                    </FavoriteButton>
+                    <ContactButton onPress={handleLinkToWhatsApp}>
                         <Image source={whatsAppIcon}/>
-                        <Text style={styles.contactButtonText}>Entre em contato</Text>
-                    </RectButton>
-                </View>
-            </View>
-        </View>
+                        <TextLightWithICon>Entre em contato</TextLightWithICon>
+                    </ContactButton>
+                </ViewHorizontalCenter>
+            </ItemFooter>
+        </ContainerItem>
     );
 }
 export default TeacherItem;

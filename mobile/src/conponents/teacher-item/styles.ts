@@ -1,94 +1,34 @@
 import {StyleSheet} from 'react-native';
-
-const styles = StyleSheet.create({
-    container:{
-        backgroundColor:'#fff',
-        borderWidth:1,
-        borderColor:'#e6e6f0',
-        borderRadius:8,
-        marginBottom:16,
-        overflow:"hidden"
-    },
-    profile:{
-        flexDirection:'row',
-        alignItems:'center',
-        padding:24
-    },
-    avatar:{
-        width:64,
-        height:64,
-        borderRadius:32,
-        backgroundColor:'#eee'
-    },
-    profileInfo:{
-        marginLeft:16
-    },
-    name:{
-        fontFamily:'Archivo_700Bold',
-        color:'#32264d',
-        fontSize:20
-    },
-    subject:{
-        fontFamily:'Poppins_400Regular',
-        color:'#646180',
-        fontSize:12,
-        marginTop:4
-    },
-    bio:{
-        marginHorizontal:24,
-        fontFamily:'Poppins_400Regular',
-        fontSize:14,
-        lineHeight:24,
-        color:'#646180',
-    },
-    footer:{
-        backgroundColor:'#fafafc',
-        padding:24,
-        alignItems:'center',
-        marginTop:24
-    },
-    price:{
-        fontFamily:'Poppins_400Regular',
-        color:'#6A6180',
-        fontSize:14,
-    },
-    priceValue:{
-        fontFamily:'Archivo_700Bold',
-        color:'#8557e5',
-        fontSize:16
-    },
-    buttonsContainer:{
-        flexDirection:'row',
-        marginTop:16,
-    },
-    favoriteButton:{
-        backgroundColor:'#8557e5',
-        width:56,
-        height:56,
-        borderRadius:8,
-        justifyContent:'center',
-        alignItems:'center',
-        marginRight:8
-    },
-    favorited:{
-        backgroundColor:'#e33d3d'
-    },
-    contactButton:{
-        backgroundColor:'#04d361',
-        flex:1,
-        flexDirection:'row',
-        height:56,
-        borderRadius:8,
-        justifyContent:'center',
-        alignItems:'center',
-        marginRight:8
-    },
-    contactButtonText:{        
-        fontFamily:'Archivo_700Bold',
-        color:'#fff',
-        fontSize:16,
-        marginLeft:16
-    }
-});
-
-export default styles;
+import { TextSecondary } from '../../assets/styles/texts';
+import styled from 'styled-components/native';
+export const ViewProfileInfo = styled.View`
+    margin-left:16px;
+`;
+export const Bio = styled(TextSecondary)`
+    margin:0 24px;
+`;
+export const Price = styled(TextSecondary)`
+    padding-bottom:16px;
+`;
+export const PriceValue = styled.Text`
+    font-family:Archivo_700Bold;
+    color:#8557e5;
+    font-size:16px;
+`;
+export interface FavoriteButtonInterface{
+    backgroundColor: string;
+ }
+export const FavoriteButton = styled.TouchableOpacity<FavoriteButtonInterface>`
+    background-color:${props => props.backgroundColor};
+    width:56px;
+    height:56px;
+    border-radius:8;
+    justify-content:center;
+    align-items:center;
+    margin-right:8px;
+`;
+export const ContactButton = styled(FavoriteButton)`
+    background-color:#04d361;
+    flex:1;
+    flex-direction:row;
+`;

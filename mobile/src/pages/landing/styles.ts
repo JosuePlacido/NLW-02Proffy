@@ -1,57 +1,25 @@
+import styled from 'styled-components/native';
 import {StyleSheet} from 'react-native';
 
-const styles = StyleSheet.create({
-    container:{
-        flex:1,
-        backgroundColor:'#8257e5',
-        justifyContent:"center",
-        padding:40
-    },
-    banner:{
-        width:'100%',
-        resizeMode:'contain'
-    },
-    title:{
-        fontFamily:'Poppins_400Regular',
-        color:'#fff',
-        fontSize:20,
-        lineHeight:30,
-        marginTop:80
-    },
-    titleBold:{
-        fontFamily:'Poppins_600SemiBold',
-    },
-    buttonsContainer:{
-        flexDirection:'row',
-        marginTop:40,
-        justifyContent:'space-between'
-    },
-    button:{
-        height:150,
-        width:'48%',
-        borderRadius:8,
-        padding:24,
-        justifyContent:'space-between'
-    },
-    buttonPrimary:{
-        backgroundColor:'#9871f5'
-    },
-    buttonSecondary:{
-        backgroundColor:'#04d361'
-    },
-    buttonText:{
-        fontFamily:'Archivo_700Bold',
-        color:"#fff",
-        fontSize:20
-    },
-    totalConnections:{        
-        fontFamily:'Poppins_400Regular',
-        color:'#d4c2ff',
-        fontSize:12,
-        lineHeight:20,
-        maxWidth:140,
-        marginTop:40
-    }
-});
+export const ButtonPrimary = styled.TouchableOpacity`
+    height:150px;
+    width:48%;
+    border-radius:8px;
+    padding:24px;
+    justify-content:space-between;
+    margin-top:40px;
+    background-color:#9871f5;
+`;
 
-export default styles;
+export const ButtonSecondary = styled(ButtonPrimary)`
+    background-color:#04d361;
+`;
+
+export const FooterDescription = styled.Text`
+    font-family:Poppins_400Regular;
+    color:#d4c2ff;
+    font-size:12px;
+    line-height:20px;
+    max-width:140px;
+    margin-top:40px;
+`;
