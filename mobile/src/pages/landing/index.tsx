@@ -1,6 +1,10 @@
-import React,{useState,useEffect} from 'react';
+import React,{useState} from 'react';
 import { Text, View, Image } from 'react-native';
-import styles from './styles';
+import { ContainerPrimary,ViewHorizontalCenter } from '../../assets/styles/views';
+import { Banner } from '../../assets/styles/images';
+import { TitleLightPoppins,TitleLightPoppinsBold } from '../../assets/styles/texts';
+import { TextLightBig } from '../../assets/styles/buttons';
+import {ButtonPrimary,ButtonSecondary,FooterDescription} from './styles';
 import landingImg from '../../assets/images/landing.png';
 import studyIcon from '../../assets/images/icons/study.png';
 import giveClassesICon from '../../assets/images/icons/give-classes.png';
@@ -8,11 +12,15 @@ import heartIcon from '../../assets/images/icons/heart.png';
 import {useNavigation, NavigationContainer, useFocusEffect} from '@react-navigation/native'
 import {RectButton} from 'react-native-gesture-handler';
 import api from '../../services/api';
+import {useAuth} from '../../contexts/auth';
 function Landing(){
+    const { signOut,user } = useAuth();
     const [totalConnections,setTotalConnection] = useState(0);
     useFocusEffect(() =>{
-        api.get('connections').then(response => {
+        console.log(api.defaults.headers);
+        api.get('home').then(response => {
             const {total} = response.data;
+            console.log(response);
             setTotalConnection(total);
         })
     });
@@ -23,30 +31,37 @@ function Landing(){
     function handleNavigateToStudyPage(){
         navigation.navigate('StudyTabs');
     }
+    function handleLogout(){
+        signOut();
+    }
     return (
-        <View style={styles.container}>
-            <Image style={styles.banner} source={landingImg}/>
-            <Text style={styles.title}>
+        <ContainerPrimary>
+            <Banner source={landingImg}/>
+            <TitleLightPoppins>
                 Seja bem vindo,{'\n'}
-                <Text style={styles.titleBold} >o que deseja fazer?</Text>                
-            </Text>
-            <View style={styles.buttonsContainer}>
-                <RectButton style={[styles.button,styles.buttonPrimary]}
-                onPress={handleNavigateToStudyPage}>
+                <TitleLightPoppinsBold>o que deseja fazer?</TitleLightPoppinsBold>                
+            </TitleLightPoppins>
+            <ViewHorizontalCenter>
+                <ButtonPrimary
+                    onPress={handleNavigateToStudyPage}>
                     <Image source={studyIcon}/>
-                    <Text style={styles.buttonText}>Estudar</Text>
-                </RectButton>
-                <RectButton style={[styles.button,styles.buttonSecondary]}
-                onPress={handleNavigateToGiveClassesPage}>
+                    <TextLightBig>Estudar</TextLightBig>
+                </ButtonPrimary>
+                <ButtonSecondary
+                    onPress={handleNavigateToGiveClassesPage}>
                     <Image source={giveClassesICon}/>
-                    <Text style={styles.buttonText}>Dar aulas</Text>
+                    <TextLightBig>Dar aulas</TextLightBig>
+                </ButtonSecondary>
+            </ViewHorizontalCenter>
+                <RectButton
+                    onPress={handleLogout}>
+                    <Text>{user?.name}</Text>
                 </RectButton>
-            </View>
-            <Text style={styles.totalConnections}>
+            <FooterDescription>
                 Total de {totalConnections} conexões já realizadas {' '}
                 <Image source={heartIcon}/>
-            </Text>
-        </View>
+            </FooterDescription>
+        </ContainerPrimary>
         )
 }
 

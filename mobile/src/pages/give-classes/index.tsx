@@ -1,12 +1,15 @@
 import React,{useState, useEffect} from 'react';
-import { View,ScrollView,Text,Image,TextInput, Picker, ToastAndroid, Platform,AlertI } from 'react-native';
-import styles from './styles'
+import { View,ScrollView,Text,Image,TextInput, Picker, ToastAndroid, Platform } from 'react-native';
+import styles from './styles';
+import {ButtonPrimary} from '../../assets/styles/buttons';
 import PageHeader from '../../conponents/page-header';
+import {TextDescription} from '../../conponents/page-header/styles';
 import TeacherItem, { Teacher } from '../../conponents/teacher-item';
 import { BorderlessButton, RectButton } from 'react-native-gesture-handler';
 import { Feather } from '@expo/vector-icons';
 import api from '../../services/api';
 import InputDefault, { TextArea } from '../../conponents/inputs';
+import { ContainerDefault } from '../../assets/styles/views';
 import InputSection from '../../conponents/input-section';
 import warnIcon from '../../assets/images/warning.png'
 import { useNavigation } from '@react-navigation/native';
@@ -44,7 +47,11 @@ export default function TeacherList(){
     const navigation = useNavigation();
     //useEffect(LoadFavorites,[]);
     async function handleSubmit(){
-        
+        navigation.navigate('Confirm',{
+            title:'Cadastro salvo!',
+            description:'Tudo certo, seu cadstro está na nossa lista de professores. Agora é só ficar de olho no seu WhatsApp.'
+        });
+        /*
         api.post('classes',{
             name,avatar,bio,whatsapp,subject,cost:Number(cost)
             ,schedule:scheduleItems
@@ -54,16 +61,16 @@ export default function TeacherList(){
                 description:'Tudo certo, seu cadstro está na nossa lista de professores. Agora é só ficar de olho no seu WhatsApp.'
             });
         })
-        .catch(() => Toast.show('Falha ao cadastrar.'));
+        .catch(() => Toast.show('Falha ao cadastrar.'));*/
         console.log({
             name,avatar,bio,whatsapp,subject,cost:Number(cost)
             ,schedule:scheduleItems
         });        
     }
     return (
-        <View style={styles.container}>
+        <ContainerDefault>
             <PageHeader title="Que incrível que você quer dar aulas.">
-                <Text style={styles.description}>O primeiro passo, é preencher esse formulário de inscrição</Text>
+                <TextDescription>O primeiro passo, é preencher esse formulário de inscrição</TextDescription>
                                
             </PageHeader>
             <ScrollView style={styles.formClass} contentContainerStyle={{
@@ -132,11 +139,11 @@ export default function TeacherList(){
                     
                  </InputSection>
                 <View style={styles.footer}>
-                    <RectButton style={styles.submitButton} onPress={handleSubmit}>
+                    <ButtonPrimary onPress={handleSubmit}>
                         <Text style={styles.submitButtonText}>
                             Salvar cadastro
                         </Text>
-                    </RectButton>
+                    </ButtonPrimary>
                     <View style={styles.footerWarn}>
                         <Image source={warnIcon} style={styles.image} resizeMode="contain" />
                         <Text style={styles.textFooter}>
@@ -146,6 +153,6 @@ export default function TeacherList(){
                     </View>
                 </View>
             </ScrollView>
-        </View>
+        </ContainerDefault>
     );
 }

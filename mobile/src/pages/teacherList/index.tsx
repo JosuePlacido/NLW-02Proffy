@@ -1,6 +1,9 @@
 import React,{useState, useEffect} from 'react';
 import { View,ScrollView,Text,TextInput } from 'react-native';
-import styles from './styles'
+import {SearchForm,LabelInPrimary,ScrollViewDefault} from './styles';
+import {ContainerDefault,ViewHorizontalCenter,ViewSubGroup} from '../../assets/styles/views';
+import {ButtonPrimary,TextLight} from '../../assets/styles/buttons';
+import {Label, TextInputDefault} from '../../conponents/inputs/styles';
 import PageHeader from '../../conponents/page-header';
 import TeacherItem, { Teacher } from '../../conponents/teacher-item';
 import { BorderlessButton, RectButton } from 'react-native-gesture-handler';
@@ -13,7 +16,26 @@ export default function TeacherList(){
     const [subject,setSubject] =  useState('');
     const [week_day,setWeekDay] =  useState('');
     const [time,setTime] =  useState('');
-    const [teachers,setTeachers] = useState([]);
+    const [teachers,setTeachers] = useState([
+        {            
+            id: 1,
+            avatar: 'http://github.com/JosuePlacido.png',
+            bio: 'bio',
+            cost: 100,
+            name: 'Josue Placido',
+            subject: 'Artes',
+            whatsapp: '45991091914'
+        },
+        {            
+            id: 2,
+            avatar: 'http://github.com/JosuePlacido.png',
+            bio: 'bio',
+            cost: 100,
+            name: 'Josue Placido',
+            subject: 'Artes',
+            whatsapp: '45991091914'
+        }
+    ]);
     const [favorites,setFavorites] = useState<number[]>([]);
 
     //useEffect(LoadFavorites,[]);
@@ -42,50 +64,46 @@ export default function TeacherList(){
         setTeachers(response.data);
     }
     return (
-        <View style={styles.container}>
+        <ContainerDefault>
             <PageHeader title="Proffys disponíveis" headerRight={(
                 <BorderlessButton>
                     <Feather name="filter" size={20} color="#fff" onPress={handleFiltersVisible}/>
                 </BorderlessButton>
             )}>
                 {filtersVisible && (
-                    <View style={styles.searchForm}>
-                        <Text style={styles.label}>Matéria</Text>
-                        <TextInput style={styles.input} placeholder="Qual a matéria?"  placeholderTextColor="#c1bccc"
+                    <SearchForm>
+                        <LabelInPrimary>Matéria</LabelInPrimary>
+                        <TextInputDefault placeholder="Qual a matéria?"  placeholderTextColor="#c1bccc"
                                 value={subject}
                                 onChangeText={t =>setSubject(t)}/>
-                        <View style={styles.inputGroup}>
-                            <View style={styles.inputBlock}>
-                                <Text style={styles.label}>Dia da semana</Text>
-                                <TextInput style={styles.input} placeholder="Qual o dia?" placeholderTextColor="#c1bccc"
+                        <ViewHorizontalCenter>
+                            <ViewSubGroup>
+                                <LabelInPrimary>Dia da semana</LabelInPrimary>
+                                <TextInputDefault placeholder="Qual o dia?" placeholderTextColor="#c1bccc"
                                 value={week_day}
                                 onChangeText={t =>setWeekDay(t)} />
-                            </View>
-                            <View style={styles.inputBlock}>
-                                <Text style={styles.label}>Horario</Text>
-                                <TextInput style={styles.input} placeholder="Qual o horário?"  placeholderTextColor="#c1bccc"
+                            </ViewSubGroup>
+                            <ViewSubGroup>
+                                <LabelInPrimary>Horario</LabelInPrimary>
+                                <TextInputDefault placeholder="Qual o horário?"  placeholderTextColor="#c1bccc"
                                 value={time}
                                 onChangeText={t =>setTime(t)}/>
-                            </View>
-                        </View>
-                        <RectButton style={styles.submitButton} onPress={handleFiltersSubmit}>
-                            <Text style={styles.submitButtonText}>
+                            </ViewSubGroup>
+                        </ViewHorizontalCenter>
+                        <ButtonPrimary onPress={handleFiltersSubmit}>
+                            <TextLight>
                                 Filtrar
-                            </Text>
-                        </RectButton>
-                    </View>
-
+                            </TextLight>
+                        </ButtonPrimary>
+                    </SearchForm>
                 )}
             </PageHeader>
-            <ScrollView style={styles.teacherList} contentContainerStyle={{
-                paddingHorizontal:16,
-                paddingBottom:16
-            }}>
+            <ScrollViewDefault>
                 {teachers.map( (t:Teacher) => {
                 return <TeacherItem key={t.id} teacher={t}
                 favorited={favorites.includes(t.id)}/>
             })}
-            </ScrollView>
-        </View>
+            </ScrollViewDefault>
+        </ContainerDefault>
     );
 }
