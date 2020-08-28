@@ -1,16 +1,19 @@
 import express from 'express'; 
 import ClassesController from './controllers/ClassesController';
 import ConnectionsController from './controllers/ConnectionsController';
-
+import UsersController from './controllers/UserController';
+import authMiddleware from './middlewares/auth';
 const routes = express.Router();
 
 const controllerClass = new ClassesController();
+const usersController = new UsersController();
 const controllerConnections = new ConnectionsController();
-routes.post('/classes',controllerClass.create);
 
+routes.post('/users',usersController.create);
+routes.post('/auth',usersController.auth);
+routes.post('/classes',controllerClass.create);
 routes.get('/classes',controllerClass.index);
 routes.post('/connections',controllerConnections.create);
-
-routes.get('/connections',controllerConnections.index);
+routes.get('/home',[authMiddleware],controllerConnections.index);
 
 export default routes;
