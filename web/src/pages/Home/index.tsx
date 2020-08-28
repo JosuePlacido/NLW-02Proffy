@@ -7,11 +7,13 @@ import giveIcon from '../../assets/images/icons/give-classes.svg';
 import purpleHeartIcon from '../../assets/images/icons/purple-heart.svg';
 import './style.css';
 import api from '../../services/api';
+import { useAuth } from "../../contexts/auth";
 
 function Landing(){
+	const { signed, signIn, user } = useAuth();
     const [totalConnections,setTotalConnection] = useState(0);
     useEffect(() =>{
-        api.get('connections').then(response => {
+        api.get('home').then(response => {
             const {total} = response.data;
             setTotalConnection(total);
         })
@@ -36,7 +38,7 @@ function Landing(){
                 <span className="total-connections">
                     Total de {totalConnections} conexões já realizadas
                     <img src={purpleHeartIcon} alt="Coração roxo"/>
-                </span>            
+                </span>
             </div>
         </div>
     )

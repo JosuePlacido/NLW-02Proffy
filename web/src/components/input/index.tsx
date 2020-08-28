@@ -24,7 +24,7 @@ interface SelectProps extends SelectHTMLAttributes<HTMLSelectElement>{
 }
 
 export const InputCondensed:React.FunctionComponent<InputProps> = ({label,name, ...rest}) => {
-    return(        
+    return(
         <DivInputCondensed>
             <LabelCondensed htmlFor={name}>{label}</LabelCondensed>
             <TextCondensed id={name} {...rest}/>
@@ -34,10 +34,10 @@ export const InputCondensed:React.FunctionComponent<InputProps> = ({label,name, 
 
 export const Password:React.FunctionComponent<InputProps> = ({label,name, ...rest}) => {
     const [visible,setVisible] = useState(false);
-    return(        
+    return(
         <DivInputCondensed>
             <LabelCondensed htmlFor={name}>{label}</LabelCondensed>
-            <PasswordCondensed id={name} {...rest} type={!visible ? 'password' : 'text'}/>            
+            <PasswordCondensed id={name} {...rest} type={!visible ? 'password' : 'text'}/>
             <TogglePassword className={!visible ? '' : 'visible'} onClick={()=>{
                 setVisible(!visible);
             }}>
@@ -47,7 +47,7 @@ export const Password:React.FunctionComponent<InputProps> = ({label,name, ...res
     );
 }
 export const TextArea:React.FunctionComponent<TextAreaProps> = ({label,name, ...rest}) => {
-    return(        
+    return(
         <InputBlock>
             <Label htmlFor={name}>{label}</Label>
             <TextAreaDefault id={name} {...rest}></TextAreaDefault>
@@ -55,7 +55,7 @@ export const TextArea:React.FunctionComponent<TextAreaProps> = ({label,name, ...
     );
 }
 const Input:React.FunctionComponent<InputProps> = ({label,name, ...rest}) => {
-    return(        
+    return(
         <InputBlock>
             <Label htmlFor={name}>{label}</Label>
             <InputDefault id={name} {...rest}/>
@@ -63,17 +63,17 @@ const Input:React.FunctionComponent<InputProps> = ({label,name, ...rest}) => {
     );
 }
 export const Checkbox:React.FunctionComponent<InputProps> = ({label,name, ...rest}) => {
-    return(       
+    return(
         <>
             <LabelCheckbox htmlFor={name}>
-                <CheckboxDefault type="checkbox" name={name} id={name}/> 
+                <CheckboxDefault type="checkbox" name={name} id={name} {...rest}/>
                 { '  '+label }
-            </LabelCheckbox> 
+            </LabelCheckbox>
         </>
     );
 }
 export const Select:React.FunctionComponent<SelectProps> = ({label,name,options, ...rest}) => {
-    return(        
+    return(
         <InputBlock className="select-block">
             <Label htmlFor={name}>{label}</Label>
             <SelectDefault value="" id={name} {...rest}>
