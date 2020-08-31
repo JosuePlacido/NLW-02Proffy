@@ -1,12 +1,14 @@
 import api from "./api";
 import { User } from "../contexts/auth";
 
-interface Response{
-    token:string;
-    user:{
-        name:string;
-        email:string;
-    }
+interface Response {
+	token: string;
+	user: {
+		name: string;
+		surname: string;
+		email: string;
+		avatar: string;
+	};
 }
 
 export function signIn(email:string,password:string):Promise<Response>{

@@ -5,6 +5,8 @@ import api from '../services/api';
 export interface User{
     email:string;
     name:string;
+    surname:string;
+    avatar:string;
 }
 export interface AuthContextData {
     loading:boolean;

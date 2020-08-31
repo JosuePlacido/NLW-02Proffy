@@ -6,7 +6,7 @@ export const ContainerDefault = styled.View`
 export const ContainerLightMargin = styled(ContainerDefault)`
     padding:20px;
 `;
-export const ContainerPrimary = styled.View`    
+export const ContainerPrimary = styled.View`
     flex:1;
     background-color:#8257e5;
     justify-content:center;

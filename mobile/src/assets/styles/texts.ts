@@ -11,8 +11,16 @@ export const TitleLight = styled(Title)`
 export const TitleLightPoppins = styled(TitleLight)`
     font-family:Poppins_400Regular;
 `;
+export const TitleSecondaryPoppins = styled(TitleLightPoppins)`
+	font-family: Poppins_400Regular;
+	color: #646180;
+`;
 export const TitleLightPoppinsBold = styled(TitleLight)`
     font-family:Poppins_600SemiBold;
+`;
+export const TitleSecondaryPoppinsBold = styled(TitleLightPoppinsBold)`
+	font-family: Poppins_600SemiBold;
+	color: #646180;
 `;
 export const TextSecondary = styled.Text`
     font-family:Poppins_400Regular;
@@ -32,4 +40,7 @@ export const DescriptionPrimary = styled.Text`
     line-height:26px;
     font-family:Poppins_400Regular;
     text-align:center;
+`;
+export const DescriptionPrimarySmall = styled(DescriptionPrimary)`
+	font-size: 12px;
 `;
