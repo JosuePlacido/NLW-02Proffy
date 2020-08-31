@@ -4,7 +4,9 @@ interface Response {
 	token: string;
 	user: {
 		name: string;
+		surname: string;
 		email: string;
+		avatar: string;
 	}
 }
 export function signIn(email: string, password: string): Promise<Response> {

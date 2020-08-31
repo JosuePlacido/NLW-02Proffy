@@ -1,9 +1,11 @@
 import React,{createContext,useState,useEffect,useContext} from 'react';
 import * as auth from '../services/auth';
 import api,{setToken} from '../services/api';
-export interface User{
-    email:string;
-    name:string;
+export interface User {
+	email: string;
+	name: string;
+	surname: string;
+	avatar: string;
 }
 export interface AuthContextData {
     loading:boolean;
@@ -46,13 +48,20 @@ export const AuthProvider:React.FC = ({children}) => {
 		}
     }
     async function signOut(){
+		localStorage.removeItem(USER_KEY);
 		localStorage.removeItem(TOKEN_KEY);
         setUser(null);
 		setToken('');
 	}
     return (
 		<AuthContext.Provider
-			value={{ loading, signed: !!user, signIn, signOut, user }}
+			value={{
+				loading,
+				signed: !!user,
+				signIn,
+				signOut,
+				user
+			}}
 		>
 			{children}
 		</AuthContext.Provider>

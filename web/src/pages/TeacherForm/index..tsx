@@ -5,7 +5,9 @@ import PageHeader from '../../components/page-header';
 import Input,{TextArea,Select} from '../../components/input';
 import './styles.css';
 import api from '../../services/api';
+import { useAuth } from "../../contexts/auth";
 function TeacherForm(){
+	const { signed, signIn, user } = useAuth();
     const history = useHistory();
     const [name,setName] = useState('');
     const [avatar,setAvatar] = useState('');
@@ -55,13 +57,13 @@ function TeacherForm(){
             <main>
                 <form onSubmit={handleCreateClass}>
                     <fieldset>
-                        <legend> Seus dados</legend>     
+                        <legend> Seus dados</legend>
                         <Input label="Nome Completo" name="name" value={name} onChange={(e) => {
                             setName(e.target.value);
-                        }}/>               
+                        }}/>
                         <Input label="Avatar" name="avatar" value={avatar} onChange={(e) => {
                             setAvatar(e.target.value);
-                        }}/>               
+                        }}/>
                         <Input label="WhatsApp" name="whatsapp" value={whatsapp} onChange={(e) => {
                             setWhattsApp(e.target.value);
                         }}/>
@@ -70,7 +72,7 @@ function TeacherForm(){
                         }}/>
                     </fieldset>
                     <fieldset>
-                        <legend> Sobre a aula</legend>     
+                        <legend> Sobre a aula</legend>
                         <Select label="Matéria" name="subject"
                             value={subject} onChange={(e) => {
                                 setSubject(e.target.value);
@@ -80,19 +82,19 @@ function TeacherForm(){
                                 {value:'Matematica',text:'Matematica'},
                                 {value:'Inglês',text:'Inglês'}
                             ]}
-                        />               
+                        />
                         <Input label="Custo da sua hora por aula" name="cost" value={cost} onChange={(e) => {
                             setCost(e.target.value);
                         }}/>
                     </fieldset>
 
                     <fieldset>
-                        <legend>Horários disponíveis 
+                        <legend>Horários disponíveis
                             <button type="button" onClick={AddNewScheduleItem}>+ Novo horário</button>
-                        </legend>    
+                        </legend>
                         {
-                            scheduleItems.map((si,index) => (  
-                                <div key={si.week_day} className="schedule-item">                        
+                            scheduleItems.map((si,index) => (
+                                <div key={si.week_day} className="schedule-item">
                                     <Select label="Dia da semana" name="week-day"
                                     value={si.week_day}
                                     onChange={ e => setScheduleItemValue(index,'week_day',e.target.value)}
@@ -105,7 +107,7 @@ function TeacherForm(){
                                         {value:'5',text:'Sexta-feira'},
                                         {value:'6',text:'Sábado'}
                                     ]}
-                                    />  
+                                    />
                                     <Input name="from" label="Das" type="time" value={si.from}
                                     onChange={ e => setScheduleItemValue(index,'from',e.target.value)}/>
                                     <Input name="to" label="Até" type="time" value={si.to}
