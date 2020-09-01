@@ -9,7 +9,7 @@ import {Background} from '../../assets/styles/images';
 import { useNavigation} from '@react-navigation/native';
 import { Ionicons } from '@expo/vector-icons';
 
-type Params = { name: string,description:string };
+type Params = { name: string,description:string,redirect:string };
 
 type ScreenProps = { language: string };
 
@@ -19,11 +19,11 @@ ScreenProps
 >(props:any){
     const navigation = useNavigation();
     function handleNavigateBack(){
-        navigation.navigate('StudyTabs');
+        navigation.navigate(props.route.params.redirect);
     }
     return (
         <ContainerPrimary>
-            <Background resizeMode="contain" source={GivaClassesBgImg}>                
+            <Background resizeMode="contain" source={GivaClassesBgImg}>
                 <Ionicons name="ios-checkmark" style={styles.icon} size={70} />
                 <Title>{props.route.params.title}</Title>
                 <Description>{props.route.params.description}</Description>

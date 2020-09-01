@@ -48,7 +48,8 @@ export default function TeacherList(){
     //useEffect(LoadFavorites,[]);
     async function handleSubmit(){
         navigation.navigate('Confirm',{
-            title:'Cadastro salvo!',
+			title:'Cadastro salvo!',
+			redirect:'StudyTabs',
             description:'Tudo certo, seu cadstro está na nossa lista de professores. Agora é só ficar de olho no seu WhatsApp.'
         });
         /*
@@ -65,26 +66,26 @@ export default function TeacherList(){
         console.log({
             name,avatar,bio,whatsapp,subject,cost:Number(cost)
             ,schedule:scheduleItems
-        });        
+        });
     }
     return (
         <ContainerDefault>
             <PageHeader title="Que incrível que você quer dar aulas.">
                 <TextDescription>O primeiro passo, é preencher esse formulário de inscrição</TextDescription>
-                               
+
             </PageHeader>
             <ScrollView style={styles.formClass} contentContainerStyle={{
                 paddingHorizontal:16,
                 paddingBottom:16
             }}>
                 <InputSection title="Seus Dados">
-                    <InputDefault label="Nome" placeholder="Nome" 
+                    <InputDefault label="Nome" placeholder="Nome"
                        value={name} onChangeText={t =>setName(t)}/>
-                    <InputDefault label="Avatar" placeholder="Url da imagem" 
+                    <InputDefault label="Avatar" placeholder="Url da imagem"
                         value={avatar} onChangeText={t =>setAvatar(t)}/>
-                    <InputDefault label="Whatsapp" placeholder="Whatsapp" 
+                    <InputDefault label="Whatsapp" placeholder="Whatsapp"
                         keyboardType="numeric"value={whatsapp} onChangeText={t =>setWhatsApp(t)}/>
-                    <TextArea label="Biogafia" placeholder="Biografia" value={bio} 
+                    <TextArea label="Biogafia" placeholder="Biografia" value={bio}
                     onChangeText={t =>setBio(t)}/>
                  </InputSection>
                 <InputSection title="Sobre a aula">
@@ -97,20 +98,20 @@ export default function TeacherList(){
                     </PickerDefault>
                     <InputDefault label="Custo da sua hora por aula" placeholder="Valor"
                         keyboardType="numeric"
-                        value={cost} 
+                        value={cost}
                         onChangeText={t => setCost(t)}/>
                  </InputSection>
-                <InputSection title="Horários disponíveis" 
+                <InputSection title="Horários disponíveis"
                 right={(
                     <BorderlessButton onPress={AddNewScheduleItem}>
                         <Text style={styles.buttonNovo}>+ Novo</Text>
                     </BorderlessButton>
                 )}>
-                    {                        
-                        scheduleItems.map((si,index) => (                              
-                            <View key={index}>  
+                    {
+                        scheduleItems.map((si,index) => (
+                            <View key={index}>
                             <PickerDefault label="Dia da semana" selectedValue={si.week_day}
-                            onValueChange={(e:string) => setScheduleItemValue(index,'week_day',e)}>                
+                            onValueChange={(e:string) => setScheduleItemValue(index,'week_day',e)}>
                                 <Picker.Item value='0' label='Domingo'/>
                                 <Picker.Item value='1' label='Segunda-feira'/>
                                 <Picker.Item value='2' label='Terça-feira'/>
@@ -119,24 +120,24 @@ export default function TeacherList(){
                                 <Picker.Item value='5' label='Sexta-feira'/>
                                 <Picker.Item value='6' label='Sábado'/>
                             </PickerDefault>
-                            <View style={styles.inputGroupInline}>     
-                                <View style={styles.subGroup}>
-                                    <InputDefault 
-                                        value={si.from} 
-                                        onChangeText={(e:string) => setScheduleItemValue(index,'from',e)}
-                                        label="De" placeholder="início"/>
-                                </View>                 
+                            <View style={styles.inputGroupInline}>
                                 <View style={styles.subGroup}>
                                     <InputDefault
-                                        value={si.to} 
+                                        value={si.from}
+                                        onChangeText={(e:string) => setScheduleItemValue(index,'from',e)}
+                                        label="De" placeholder="início"/>
+                                </View>
+                                <View style={styles.subGroup}>
+                                    <InputDefault
+                                        value={si.to}
                                         onChangeText={(e:string) => setScheduleItemValue(index,'to',e)}
                                         label="Até" placeholder="término"/>
-                                </View>               
+                                </View>
                             </View>
                         </View>
                         ))
                     }
-                    
+
                  </InputSection>
                 <View style={styles.footer}>
                     <ButtonPrimary onPress={handleSubmit}>

@@ -2,9 +2,9 @@ import {StyleSheet} from 'react-native';
 import styled from 'styled-components/native';
 import {TitleLight} from '../../assets/styles/texts';
 export const Title = styled(TitleLight)`
-    font-size:32px;
+    font-size:28px;
     line-height:37px;
-    max-width:180px;
+    max-width:200px;
     text-align:center;
     margin-top:24px;
 `;
