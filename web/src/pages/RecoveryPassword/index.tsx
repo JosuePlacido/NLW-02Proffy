@@ -1,10 +1,12 @@
 import React, { useState, FormEvent } from "react";
-import { useHistory } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
 import Banner from "../../components/banner";
 import { FormCentralized, Title, ButtonAlternative, MainCentralized } from "../../assets/styles/styles";
 import { InputCondensed } from "../../components/input";
 import { PageBannerReverse } from "../../assets/styles/panels";
 import api from "../../services/api";
+import backIcon from "../../assets/images/icons/back.svg";
+import { Header } from "./styles";
 
 function RecoveryPassword() {
 	const history = useHistory();
@@ -28,6 +30,11 @@ function RecoveryPassword() {
 		<PageBannerReverse id="page-recovery-password">
 			<MainCentralized>
 				<FormCentralized onSubmit={handleRecoveryPassword}>
+					<Header>
+						<Link to="/">
+							<img src={backIcon} alt="Voltaroltar" />
+						</Link>
+					</Header>
 					<Title>
 						Eita, esqueçeu <br /> sua senha?
 					</Title>
