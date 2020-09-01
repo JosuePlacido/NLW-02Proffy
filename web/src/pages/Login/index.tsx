@@ -4,9 +4,10 @@ import Input,{InputCondensed,Password,Checkbox} from '../../components/input';
 import purpleHeartIcon from '../../assets/images/icons/purple-heart.svg';
 import api from '../../services/api';
 import { useHistory } from 'react-router-dom';
+import { PageBanner } from "../../assets/styles/panels";
 import {Title,ButtonAlternative,Label,LinkPrimary,
     DivPaddingVerticalSpaceBetWeen,
-    PageAuth,FormCentralized,IconInText,FooterCentralized,
+    FormCentralized,IconInText,FooterCentralized,
     LinkSecondary,MainCentralized} from '../../assets/styles/styles';
 import { useAuth } from '../../contexts/auth';
 function Login(){
@@ -20,13 +21,11 @@ function Login(){
 		e.preventDefault();
 	}
     return (
-		<PageAuth id="page-login">
+		<PageBanner id="page-login">
 			<Banner></Banner>
 			<MainCentralized>
 				<FormCentralized onSubmit={handleLogin}>
-					<Title>
-						Fazer login
-					</Title>
+					<Title>Fazer login</Title>
 					<br />
 					<InputCondensed
 						label="E-mail"
@@ -53,7 +52,7 @@ function Login(){
 							checked={remember}
 							onChange={(e) => setRemember(e.target.checked)}
 						></Checkbox>
-						<LinkSecondary href="">
+						<LinkSecondary href="/recovery-passsword">
 							Esqueçi minha senha.
 						</LinkSecondary>
 					</DivPaddingVerticalSpaceBetWeen>
@@ -71,7 +70,7 @@ function Login(){
 					</Label>
 				</FooterCentralized>
 			</MainCentralized>
-		</PageAuth>
+		</PageBanner>
 	);
 }
 

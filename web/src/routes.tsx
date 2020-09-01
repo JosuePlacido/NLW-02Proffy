@@ -3,7 +3,9 @@ import {BrowserRouter,Route, Redirect, Switch, RouteProps} from 'react-router-do
 import TeacherList from './pages/TeacherList';
 import TeacherForm from './pages/TeacherForm/index.';
 import Login from './pages/Login';
+import RecoveryPassword from './pages/RecoveryPassword';
 import Home from './pages/Home';
+import Confirm from './pages/Confirm';
 import { useAuth,getToken } from './contexts/auth';
 interface PrivateRouteProps extends RouteProps {
 	component: any;
@@ -54,7 +56,12 @@ function Routes(){
 		<BrowserRouter>
 			<Switch>
 				<OnlyPublicRoute path="/login" component={Login} />
+				<OnlyPublicRoute
+					path="/recovery-passsword"
+					component={RecoveryPassword}
+				/>
 				<PrivateRoute path="/" exact component={Home} />
+				<Route path="/confirm" component={Confirm} />
 				<PrivateRoute path="/home" component={Home} />
 				<PrivateRoute path="/study" component={TeacherList} />
 				<PrivateRoute path="/give-classes" component={TeacherForm} />

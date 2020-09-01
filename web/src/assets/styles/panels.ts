@@ -22,3 +22,21 @@ export const ContainerFullFlexCenter = styled.div`
     justify-content: center;
     align-items: center;
 `;
+export const PageBanner = styled.div`
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    @media(min-width: 900px) {
+        grid-column: 1fr 1fr;
+        flex-direction: row;
+  }
+`;
+export const PageBannerReverse = styled.div`
+    width: 100vw;
+    display: flex;
+    flex-direction: column-reverse;
+    @media(min-width: 900px) {
+        grid-column: 1fr 1fr;
+        flex-direction: row;
+  }
+`;

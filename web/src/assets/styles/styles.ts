@@ -8,7 +8,7 @@ export const inputDefault = styled.input`
     padding: 0 1.6rem;
     font: 1.6rem Archivo;
 `;
-export const ButtonAlternative = styled.button`    
+export const ButtonAlternative = styled.button`
     width:100%;
     height: 5.6rem;
     color: var(--color-text-complement);
@@ -27,7 +27,7 @@ export const ButtonAlternative = styled.button`
         color: var(--color-button-text);
     }
 `;
-export const ButtonPrimary = styled.button`   
+export const ButtonPrimary = styled.button`
     width:100%;
     height: 5.6rem;
     background: var(--color-secundary);
@@ -44,15 +44,15 @@ export const ButtonPrimary = styled.button`
     &:hover {
         background: var(--color-secundary-dark);
 }`;
-export const Label = styled.label`   
+export const Label = styled.label`
     font-size: 1.4rem;
     color: var(--color-text-complement);
 `;
-export const LegendDefault = styled.legend`   
+export const LegendDefault = styled.legend`
     font-size: 1.4rem;
     color: var(--color-text-complement);
 `;
-export const LinkSecondary = styled.a`   
+export const LinkSecondary = styled.a`
     font-size: 1.4rem;
     color: var(--color-text-complement);
     text-decoration:none;
@@ -61,19 +61,13 @@ export const LinkSecondary = styled.a`
         text-decoration:underline;
     }
 `;
-export const Title = styled.h1` 
+export const Title = styled.h1`
     color:var(--color-text-title);
 `;
-export const PageAuth = styled.div` 
-    width: 100vw;
-    display: flex;
-    flex-direction: column;
-    @media(min-width: 900px) {
-        grid-column: 1fr 1fr;
-        flex-direction: row;
-  }
+export const TitleInPrimary = styled.h1`
+    color:var(--color-text-in-primary);
 `;
-export const MainCentralized = styled.main` 
+export const MainCentralized = styled.main`
     @media(min-width: 900px) {
         height: 100vh;
         width: 50%;
@@ -83,17 +77,17 @@ export const MainCentralized = styled.main`
         justify-content: center;
   }
 `;
-export const FormCentralized = styled.form` 
+export const FormCentralized = styled.form`
     padding: 0.9rem;
     width: 100vw;
     @media(min-width: 900px) {
         width:65%;
   }
 `;
-export const IconInText = styled.img` 
+export const IconInText = styled.img`
     margin:0 10px;
 `;
-export const LinkPrimary = styled.a` 
+export const LinkPrimary = styled.a`
     font-size: 1.6rem;
     font-weight:700;
     color: var(--color-primary);
@@ -102,7 +96,7 @@ export const LinkPrimary = styled.a`
         text-decoration:underline;
     }
 `;
-export const FooterCentralized = styled.footer`    
+export const FooterCentralized = styled.footer`
     margin-top: 5rem;
     display: flex;
     width: 100%;
@@ -114,7 +108,7 @@ export const FooterCentralized = styled.footer`
         padding:0;
   }
 `;
-export const DivPaddingVerticalSpaceBetWeen = styled.span`    
+export const DivPaddingVerticalSpaceBetWeen = styled.span`
     display: flex;
     align-items: center;
     justify-content: space-between;

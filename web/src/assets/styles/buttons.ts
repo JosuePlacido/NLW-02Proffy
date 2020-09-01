@@ -13,11 +13,21 @@ export const Default = styled.button`
 export const LinkDefault = styled.a`
     border-radius: 0.8rem;
     font: 700 2.0rem Archivo;
+    cursor: pointer;
     display:flex;
     align-items: center;
     justify-content: center;
     text-decoration: none;
     transition: 0.2s;
+`;
+export const LinkSecondary = styled(LinkDefault)`
+	height: 5.6rem;
+	padding:0 4rem;
+    background: var(--color-secundary);
+    color: var(--color-button-text);
+    &:hover {
+		background: var(--color-secundary-dark);
+	}
 `;
 export const Logout = styled(Default)`
 	height: 4rem;
