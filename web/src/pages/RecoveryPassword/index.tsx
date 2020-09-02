@@ -12,17 +12,18 @@ function RecoveryPassword() {
 	const history = useHistory();
 	const [email, setEmail] = useState("");
 	function handleRecoveryPassword(e: FormEvent) {
-		history.push({
-			pathname: "/confirm",
-			state: {
-				title: "Redefinição enviada!",
-				description:
-					"Boa, agora é só checar o e-mail que foi enviado " +
-					"para você redefinir sua senha e aproveitar os estudos",
-			}
-		});
 		api.post("/recovery-password", { email })
-			.then(() => history.push("/confirm"))
+			.then(() =>
+				history.push({
+					pathname: "/confirm",
+					state: {
+						title: "Redefinição enviada!",
+						description:
+							"Boa, agora é só checar o e-mail que foi enviado " +
+							"para você redefinir sua senha e aproveitar os estudos",
+					},
+				})
+			)
 			.catch(() => alert(alert("Erro no cadastro.")));
 		e.preventDefault();
 	}

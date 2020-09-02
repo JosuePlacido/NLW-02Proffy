@@ -4,6 +4,7 @@ import TeacherList from './pages/TeacherList';
 import TeacherForm from './pages/TeacherForm/index.';
 import Login from './pages/Login';
 import RecoveryPassword from './pages/RecoveryPassword';
+import ResetPassword from './pages/ResetPassword';
 import Home from './pages/Home';
 import Confirm from './pages/Confirm';
 import { useAuth,getToken } from './contexts/auth';
@@ -56,9 +57,13 @@ function Routes(){
 		<BrowserRouter>
 			<Switch>
 				<OnlyPublicRoute path="/login" component={Login} />
-				<OnlyPublicRoute
+				<Route
 					path="/recovery-passsword"
 					component={RecoveryPassword}
+				/>
+				<Route
+					path="/reset-password"
+					component={ResetPassword}
 				/>
 				<PrivateRoute path="/" exact component={Home} />
 				<Route path="/confirm" component={Confirm} />
