@@ -4,35 +4,82 @@ import bcrypt from 'bcrypt';
 import { string, object } from 'yup';
 
 let yup = require('yup');
-export default class UserDAO{
-    async create(user:User) {
-        const hash = await this.hashPassword(user.password);
-        user.password = hash;
-        await db('users').insert(user);
-        return {id:user.id,name:user.name,
-            surname:user.surname,email:user.email};
-    }
-    async getByLogin(email:string){
-        return db('users').whereRaw('email LIKE ?', [email]).first();
-    }
-    async validateCreate(user:User){
-        if(await this.getByLogin(user.email)){
-            return false;
-        }
-        return await yup.object().shape({
-            name: yup.string().required(),
-            surname: yup.string().required(),
-            bio: yup.string(),
-            email: yup.string().required(),
-            whatsapp: yup.string(),
-            avatar: yup.string().url(),
-            password: yup.string().required()
-          }).isValid(user);
-    }
-    async hashPassword(password:string){
-        return await bcrypt.hash(password, 8);
-    }
-    async comparePasswordHash(password:string,hash:string){
-        return await bcrypt.compare(password, hash);
-    }
+export default class UserDAO {
+	async create(user: User) {
+		const hash = await this.hashPassword(user.password);
+		user.password = hash;
+		await db("users").insert(user);
+		return {
+			id: user.id,
+			name: user.name,
+			surname: user.surname,
+			email: user.email,
+		};
+	}
+	async getByLogin(email: string) {
+		return db("users").whereRaw("email LIKE ?", [email]).first();
+	}
+	async validateCreate(user: User) {
+		if (await this.getByLogin(user.email)) {
+			return false;
+		}
+		return await yup
+			.object()
+			.shape({
+				name: yup.string().required(),
+				surname: yup.string().required(),
+				bio: yup.string(),
+				email: yup.string().required(),
+				whatsapp: yup.string(),
+				avatar: yup.string().url(),
+				password: yup.string().required(),
+			})
+			.isValid(user);
+	}
+	async setToken(user: number, token: string, expire: any) {
+		const oldToken = await db("resets_passwords_token")
+			.whereRaw("userId = ?", [user])
+			.first();
+		if (oldToken) {
+			console.log(oldToken);
+			await db("resets_passwords_token")
+				.update({
+					token,
+					expire,
+				})
+				.where("userId", user);
+		} else
+			await db("resets_passwords_token").insert({
+				userId: user,
+				token,
+				expire,
+			});
+	}
+	async CompareToken(user: number, token: string) {
+		const result = await db("resets_passwords_token")
+			.whereRaw("userId = ? and token = ? and expire <= ?", [
+				user,
+				token,
+				new Date(),
+			])
+			.first();
+		return result !== null;
+	}
+	async resetPassword(user:number,password: string) {
+		const hash = await this.hashPassword(password);
+			await db("users")
+				.update({
+					password:hash
+				})
+				.where("id", user);
+			 await db("resets_passwords_token")
+					.where("userId", user)
+					.del();
+	}
+	async hashPassword(password: string) {
+		return await bcrypt.hash(password, 8);
+	}
+	async comparePasswordHash(password: string, hash: string) {
+		return await bcrypt.compare(password, hash);
+	}
 }

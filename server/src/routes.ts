@@ -1,4 +1,4 @@
-import express from 'express'; 
+import express from 'express';
 import ClassesController from './controllers/ClassesController';
 import ConnectionsController from './controllers/ConnectionsController';
 import UsersController from './controllers/UserController';
@@ -11,6 +11,8 @@ const controllerConnections = new ConnectionsController();
 
 routes.post('/users',usersController.create);
 routes.post('/auth',usersController.auth);
+routes.post('/recovery-password',usersController.forgotPassword);
+routes.post('/reset-password',usersController.resetPassword);
 routes.post('/classes',controllerClass.create);
 routes.get('/classes',controllerClass.index);
 routes.post('/connections',controllerConnections.create);

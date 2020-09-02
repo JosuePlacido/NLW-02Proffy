@@ -5,3 +5,9 @@ declare namespace Express {
        user?: number
     }
  }
+ declare module "nodemailer-express-handlebars" {
+		function nodemailerExpressHandlebars(data: any): any;
+
+		module nodemailerExpressHandlebars {}
+		export = nodemailerExpressHandlebars;
+ }
