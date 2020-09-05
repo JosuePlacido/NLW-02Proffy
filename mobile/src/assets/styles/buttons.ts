@@ -7,7 +7,10 @@ export const ButtonPrimary = styled.TouchableOpacity`
     justify-content:center;
     border-radius:8px;
 `;
-export const TextLight = styled.Text`         
+ export const ButtonSecondary = styled(ButtonPrimary)`
+    background-color:#8257E5;
+`;
+export const TextLight = styled.Text`
     font-family:Archivo_700Bold;
     color:#fff;
     font-size:16px;
@@ -19,6 +22,6 @@ export const TextLightWithICon = styled(TextLight)`
     margin-left:16px;
 `;
 export const ButtonLinkText = styled.Text`
-    font-family:Poppins_400Regular;    
+    font-family:Poppins_400Regular;
     color:#8257E5;
 `;

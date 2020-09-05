@@ -12,7 +12,7 @@ import { BorderlessButton } from 'react-native-gesture-handler';
 import backIcon from "../../assets/images/icons/back.png";
 import api from '../../services/api';
 const PasswordRecovery: React.FC = () => {
-    const [email, setEmail] = useState("ozzyplacidojunior2@hotmail.com");
+    const [email, setEmail] = useState("");
     const navigation = useNavigation();
     async function handleRecoveryPassword() {
 		if(email){
