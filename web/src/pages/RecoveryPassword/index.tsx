@@ -4,9 +4,9 @@ import Banner from "../../components/banner";
 import { FormCentralized, Title, ButtonAlternative, MainCentralized } from "../../assets/styles/styles";
 import { InputCondensed } from "../../components/input";
 import { PageBannerReverse } from "../../assets/styles/panels";
+import { BackButton } from "../../assets/styles/buttons";
 import api from "../../services/api";
 import backIcon from "../../assets/images/icons/back.svg";
-import { Header } from "./styles";
 
 function RecoveryPassword() {
 	const history = useHistory();
@@ -24,18 +24,18 @@ function RecoveryPassword() {
 					},
 				})
 			)
-			.catch(() => alert(alert("Erro no cadastro.")));
+			.catch(() => alert("Erro no cadastro."));
 		e.preventDefault();
 	}
 	return (
 		<PageBannerReverse id="page-recovery-password">
 			<MainCentralized>
 				<FormCentralized onSubmit={handleRecoveryPassword}>
-					<Header>
+					<BackButton>
 						<Link to="/">
 							<img src={backIcon} alt="Voltaroltar" />
 						</Link>
-					</Header>
+					</BackButton>
 					<Title>
 						Eita, esqueçeu <br /> sua senha?
 					</Title>

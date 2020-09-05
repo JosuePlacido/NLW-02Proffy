@@ -7,6 +7,7 @@ import RecoveryPassword from './pages/RecoveryPassword';
 import ResetPassword from './pages/ResetPassword';
 import Home from './pages/Home';
 import Confirm from './pages/Confirm';
+import Register from './pages/Register';
 import { useAuth,getToken } from './contexts/auth';
 interface PrivateRouteProps extends RouteProps {
 	component: any;
@@ -57,6 +58,7 @@ function Routes(){
 		<BrowserRouter>
 			<Switch>
 				<OnlyPublicRoute path="/login" component={Login} />
+				<OnlyPublicRoute path="/register" component={Register} />
 				<Route
 					path="/recovery-passsword"
 					component={RecoveryPassword}

@@ -62,7 +62,7 @@ function Login(){
 					<span>
 						Não tem conta?
 						<br />
-						<LinkPrimary href="#">Cadastre-se</LinkPrimary>
+						<LinkPrimary href="/Register">Cadastre-se</LinkPrimary>
 					</span>
 					<Label>
 						É de graça
