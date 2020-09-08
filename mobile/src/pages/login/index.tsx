@@ -12,8 +12,8 @@ import InputSection from '../../conponents/input-section';
 import {InputCondensed} from '../../conponents/inputs';
 const SignIn: React.FC = () => {
     const { signed,user,signIn } = useAuth();
-    const [email,setEmail] = useState('');
-    const [senha,setSenha] = useState('');
+    const [email,setEmail] = useState('ozzyplacidojunior@hotmail.com');
+    const [senha,setSenha] = useState('Ozzy2107');
     const [remember, setRemember] = useState(signed);
     async function handleLogin(){
         signIn(email,senha,remember);
@@ -32,7 +32,7 @@ const SignIn: React.FC = () => {
                 <InputSection title="Fazer login" right={(
                     <BorderlessButton onPress={handleCreateAccount}>
                         <ButtonLinkText>Criar uma conta</ButtonLinkText>
-                    </BorderlessButton>  
+                    </BorderlessButton>
                 )}>
                     <InputCondensed label="E-mail"
                          value={email} onChangeText={(text:string) =>setEmail(text)}/>
@@ -40,14 +40,14 @@ const SignIn: React.FC = () => {
                          value={senha} onChangeText ={t =>setSenha(t)} />
                          <ViewHorizontalCenterPaddingVertical>
                             <ViewHorizontalCenter>
-                                <CheckBox value={remember}                          
+                                <CheckBox value={remember}
                                     tintColors={{ true: '#04d361' }}
                                     onValueChange={setRemember}/>
-                                <TextSecondary>Lembrar-me?</TextSecondary>  
+                                <TextSecondary>Lembrar-me?</TextSecondary>
                             </ViewHorizontalCenter>
                             <BorderlessButton onPress={handlePasswordRecovery}>
                                 <TextSecondary>Esqueci minha senha</TextSecondary>
-                            </BorderlessButton>                          
+                            </BorderlessButton>
                          </ViewHorizontalCenterPaddingVertical>
                     <ButtonPrimary onPress={handleLogin}>
                         <TextLight>Entrar</TextLight>

@@ -5,14 +5,7 @@ import AuthRoutes from './auth.routes';
 import { ContainerPrimary } from '../assets/styles/views';
 import { ActivityIndicator } from 'react-native';
 const Routes: React.FC = () => {
-    const { loading,signed } = useAuth();    
-    if(loading){
-        return (
-            <ContainerPrimary>
-                <ActivityIndicator size="large"></ActivityIndicator>
-            </ContainerPrimary>
-        );
-    }
+    const { signed } = useAuth();
     return (signed?<AppRoutes />:<AuthRoutes/>);
 }
 export default Routes;

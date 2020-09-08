@@ -1,14 +1,14 @@
 {
   "expo": {
-    "name": "mobile",
-    "slug": "mobile",
+    "name": "Proffy",
+    "slug": "Proffy",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./src/assets/images/icon.png",
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./src/assets/images/splash.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#8257E5"
     },
     "updates": {
       "fallbackToCacheTimeout": 0
@@ -17,10 +17,14 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+	  "supportsTablet": true,
+	  "bundleIdentifier":"com.alternativadigital.proffy"
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+	},
+	"android":{
+		"package":"com.alternativadigital.proffy"
+	}
   }
 }

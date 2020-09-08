@@ -13,17 +13,18 @@ import { NavigationContainer } from "@react-navigation/native";
 import { AppLoading } from "expo";
 import { StatusBar } from "expo-status-bar";
 
-import { AuthProvider } from "./src/contexts/auth";
+import { AuthProvider, useAuth } from "./src/contexts/auth";
 import Routes from "./src/routes/index";
 
 export default function App() {
+    const { loading, signed } = useAuth();
 	const [fontsLoaded] = useFonts({
 		Archivo_400Regular,
 		Archivo_700Bold,
 		Poppins_400Regular,
 		Poppins_600SemiBold,
 	});
-	if (!fontsLoaded) {
+	if (!fontsLoaded || loading) {
 		return <AppLoading />;
 	}
 	return (
