@@ -1,6 +1,6 @@
 import React from 'react';
 import { Text, View, Image,TouchableOpacity, ImageBackground } from 'react-native';
-import GivaClassesBgImg from '../../assets/images/give-classes-background.png';
+import GivaClassesBgImg from '../../assets/images/confirm.png';
 import styles,{ Title,Description } from './styles';
 import {ButtonPrimary,TextLight} from '../../assets/styles/buttons';
 import {ContainerPrimary} from '../../assets/styles/views';
@@ -22,15 +22,15 @@ ScreenProps
         navigation.navigate(props.route.params.redirect);
     }
     return (
-        <ContainerPrimary>
-            <Background resizeMode="contain" source={GivaClassesBgImg}>
-                <Ionicons name="ios-checkmark" style={styles.icon} size={70} />
-                <Title>{props.route.params.title}</Title>
-                <Description>{props.route.params.description}</Description>
-            </Background>
-            <ButtonPrimary onPress={handleNavigateBack}>
-                <TextLight>Tudo bem</TextLight>
-            </ButtonPrimary>
-        </ContainerPrimary>
-    );
+		<ContainerPrimary>
+			<Background resizeMode="contain" source={GivaClassesBgImg}>
+				<Ionicons name="ios-checkmark" style={styles.icon} size={70} />
+				<Title>{props.route.params.title}</Title>
+				<Description>{props.route.params.description}</Description>
+			</Background>
+			<ButtonPrimary onPress={handleNavigateBack}>
+				<TextLight>Tudo bem</TextLight>
+			</ButtonPrimary>
+		</ContainerPrimary>
+	);
 }
