@@ -43,3 +43,7 @@ export const ItemFooter = styled.View`
     padding:24px;
     flex-direction:column;
 `;
+export const ViewVerticalCenterPadding = styled.View`
+	align-items: center;
+	padding: 24px;
+`;

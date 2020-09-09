@@ -14,10 +14,11 @@ import { AppLoading } from "expo";
 import { StatusBar } from "expo-status-bar";
 
 import { AuthProvider, useAuth } from "./src/contexts/auth";
+import { useFirstLaunch,FirstLaunchProvider } from "./src/contexts/firstLaunch";
 import Routes from "./src/routes/index";
 
 export default function App() {
-    const { loading, signed } = useAuth();
+    const { loading } = useAuth();
 	const [fontsLoaded] = useFonts({
 		Archivo_400Regular,
 		Archivo_700Bold,
@@ -30,8 +31,10 @@ export default function App() {
 	return (
 		<NavigationContainer>
 			<AuthProvider>
+			<FirstLaunchProvider>
 				<StatusBar style="light"/>
 				<Routes />
+			</FirstLaunchProvider>
 			</AuthProvider>
 		</NavigationContainer>
 	);
