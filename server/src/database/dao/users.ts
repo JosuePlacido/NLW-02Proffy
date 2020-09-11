@@ -1,5 +1,5 @@
 import db from '../connection';
-import User from '../../models/user';
+import User,{ UserUpdate} from '../../models/user';
 import bcrypt from 'bcrypt';
 import { string, object } from 'yup';
 
@@ -14,6 +14,34 @@ export default class UserDAO {
 			name: user.name,
 			surname: user.surname,
 			email: user.email,
+		};
+	}
+	async update({id,bio,avatar,whatsapp,subjects}: UserUpdate) {
+		await db("users")
+			.where("id", "=", id)
+			.update({
+				avatar,
+				bio,
+				whatsapp: whatsapp.replace(/\D/g, ""),
+			});
+		subjects.forEach(async (subject) =>{
+			subject.schedules.forEach(async (schedule) => {
+				await db("class_schedule")
+					.where('id','=',schedule.id)
+					.update({
+						from:schedule.from,to:schedule.to,week_day:schedule.week_day
+					});
+				});
+			await db("classes")
+				.where('id','=',subject.id)
+				.update({
+					cost:subject.cost
+				});
+		});
+		return {
+			avatar,
+			bio,
+			whatsapp
 		};
 	}
 	async getByLogin(email: string) {
@@ -33,6 +61,20 @@ export default class UserDAO {
 				whatsapp: yup.string(),
 				avatar: yup.string().url(),
 				password: yup.string().required(),
+			})
+			.isValid(user);
+	}
+	async validateUpdate(user: UserUpdate) {
+		if (await db("users").where("id", user.id).first() == undefined) {
+			return false;
+		}
+		return await yup
+			.object()
+			.shape({
+				id: yup.number().required(),
+				bio: yup.string(),
+				whatsapp: yup.string(),
+				avatar: yup.string().url(),
 			})
 			.isValid(user);
 	}
@@ -65,16 +107,14 @@ export default class UserDAO {
 			.first();
 		return result !== null;
 	}
-	async resetPassword(user:number,password: string) {
+	async resetPassword(user: number, password: string) {
 		const hash = await this.hashPassword(password);
-			await db("users")
-				.update({
-					password:hash
-				})
-				.where("id", user);
-			 await db("resets_passwords_token")
-					.where("userId", user)
-					.del();
+		await db("users")
+			.update({
+				password: hash,
+			})
+			.where("id", user);
+		await db("resets_passwords_token").where("userId", user).del();
 	}
 	async hashPassword(password: string) {
 		return await bcrypt.hash(password, 8);

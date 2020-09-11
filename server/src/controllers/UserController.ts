@@ -1,6 +1,6 @@
 import{Request,Response} from 'express';
 import daoUser from '../database/dao/users';
-import User from '../models/user';
+import User,{UserUpdate} from '../models/user';
 import jwt from 'jsonwebtoken';
 import crypto from 'crypto';
 import authConfig from '../config/auth.json';
@@ -95,6 +95,25 @@ export default class UsersController {
 		} catch (err) {
 			console.log(err);
 			return response.status(400).send({ error: "User inválid!" });
+		}
+	}
+	async update(request:Request,response:Response){
+		const user: UserUpdate = request.body;
+		const dao = new daoUser();
+		try {
+			if (await dao.validateUpdate(user)) {
+				const userResult = await dao.update(user);
+				return response.status(201).send({
+					user: userResult
+				});
+			} else {
+				return response.status(400).json({ error: "User invalid" });
+			}
+		} catch (err) {
+			console.log(err);
+			return response
+				.status(400)
+				.json({ error: "User registration failed" });
 		}
 	}
 }
