@@ -4,6 +4,6 @@ export interface Class {
 	id: number;
 	subject: string;
 	cost: number;
-	userId: number;
+	userId: string;
 	schedules: ScheduleItemFull[];
 }

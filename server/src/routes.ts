@@ -10,7 +10,7 @@ const usersController = new UsersController();
 const controllerConnections = new ConnectionsController();
 
 routes.post('/users',usersController.create);
-routes.put('/users',usersController.update);
+routes.put('/user',usersController.update);
 routes.post('/auth',usersController.auth);
 routes.post('/recovery-password',usersController.forgotPassword);
 routes.post('/reset-password',usersController.resetPassword);

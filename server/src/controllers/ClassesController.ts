@@ -1,7 +1,9 @@
 import{Request,Response} from 'express';
-import converHourToMinutes from '../utils/converHourToMinutes';
+import converHourToMinutes, { converMinutestoHour } from '../utils/converHourToMinutes';
 import db from '../database/connection';
 import ClassDAO from '../database/dao/classes';
+import { ScheduleItem} from '.././models/class_schedule';
+import {Class} from '.././models/class';
 import ClassScheduleDAO from '../database/dao/class_schedule';
 export default class ClassesController {
 	async create(request: Request, response: Response) {
@@ -54,12 +56,12 @@ export default class ClassesController {
 		if(!id){
 			return response.json([]);
 		}
-		let classes = await new ClassDAO().getAllByUser(parseInt(id)) as ClassResult[];
+		let classes = await new ClassDAO().getAllByUser(parseInt(id)) as Class[];
 
 		for(let x=0; x < classes.length;x++){
 			classes[x].schedules = await new ClassScheduleDAO().getAllByClass(
 				classes[x].id
-			);
+			) as ScheduleItem[];
 		}
 		return response.json(classes);
 	}

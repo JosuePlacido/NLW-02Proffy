@@ -2,6 +2,7 @@ import db from '../connection';
 import User,{ UserUpdate} from '../../models/user';
 import bcrypt from 'bcrypt';
 import { string, object } from 'yup';
+import converHourToMinutes from '../../utils/converHourToMinutes';
 
 let yup = require('yup');
 export default class UserDAO {
@@ -16,33 +17,24 @@ export default class UserDAO {
 			email: user.email,
 		};
 	}
-	async update({id,bio,avatar,whatsapp,subjects}: UserUpdate) {
-		await db("users")
+	async update({id,bio,avatar,whatsapp,subjects}: UserUpdate,trx:any) {
+		if (trx) {
+			return await trx('users')
+			.where("id", "=", id)
+			.update({
+				avatar,
+				bio,
+				whatsapp: whatsapp.replace(/\D/g, ""),
+			}, 'id');
+
+		}
+		return await db("users")
 			.where("id", "=", id)
 			.update({
 				avatar,
 				bio,
 				whatsapp: whatsapp.replace(/\D/g, ""),
 			});
-		subjects.forEach(async (subject) =>{
-			subject.schedules.forEach(async (schedule) => {
-				await db("class_schedule")
-					.where('id','=',schedule.id)
-					.update({
-						from:schedule.from,to:schedule.to,week_day:schedule.week_day
-					});
-				});
-			await db("classes")
-				.where('id','=',subject.id)
-				.update({
-					cost:subject.cost
-				});
-		});
-		return {
-			avatar,
-			bio,
-			whatsapp
-		};
 	}
 	async getByLogin(email: string) {
 		return db("users").whereRaw("email LIKE ?", [email]).first();
