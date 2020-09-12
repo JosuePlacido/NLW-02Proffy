@@ -6,7 +6,7 @@ export const TextCondensed = styled.input`
     border:none;
     outline: 0;
 `;
-export const DivInputCondensed = styled.fieldset`    
+export const DivInputCondensed = styled.fieldset`
     display:flex;
     flex-direction:column;
     position:relative;
@@ -56,19 +56,30 @@ export const TogglePassword = styled.span`
         color:var(--color-primary);
     }
 `;
-export const InputBlock = styled.div`    
-    position: relative;
-    margin-top: 1.4rem;
-    &:focus-within::after{
-        width: calc(100% - 3.2rem);
-        height: 2px;
-        content: '';
-        background: var(--color-primary-light);
-        left:1.6rem;
-        right: 1.6rem;
-        position: absolute;
-        bottom: 0;
-    }
+export const InputBlock = styled.div`
+	position: relative;
+	margin-top: 1.4rem;
+	& .mask {
+		width: 100%;
+		height: 5.6rem;
+		margin-top: 0.8rem;
+		border-radius: 0.8rem;
+		background-color: var(--color-input-background);
+		border: solid 1px var(--color-line-in-white);
+		outline: 0;
+		padding: 0 1.6rem;
+		font: 1.6rem Archivo;
+	}
+	&:focus-within::after {
+		width: calc(100% - 3.2rem);
+		height: 2px;
+		content: "";
+		background: var(--color-primary-light);
+		left: 1.6rem;
+		right: 1.6rem;
+		position: absolute;
+		bottom: 0;
+	}
 `;
 export const InputDefault = styled.input`
     width: 100%;
@@ -81,7 +92,7 @@ export const InputDefault = styled.input`
     padding: 0 1.6rem;
     font: 1.6rem Archivo;
 `;
-export const TextAreaDefault = styled.textarea`    
+export const TextAreaDefault = styled.textarea`
     height: 16rem;
     min-height: 8rem;
     resize:vertical;

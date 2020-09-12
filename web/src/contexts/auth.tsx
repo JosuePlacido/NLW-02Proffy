@@ -1,18 +1,14 @@
 import React,{createContext,useState,useEffect,useContext} from 'react';
 import * as auth from '../services/auth';
 import api,{setToken} from '../services/api';
-export interface User {
-	email: string;
-	name: string;
-	surname: string;
-	avatar: string;
-}
+import { User } from '../models/user';
+
 export interface AuthContextData {
     loading:boolean;
     signed:boolean;
     signIn(email:string,password:string,remember:boolean):Promise<void>;
     signOut():void;
-	user:User|null;
+	user:User;
 }
 export const TOKEN_KEY = "@auth-token";
 export const USER_KEY = "@auth-user";
@@ -60,7 +56,7 @@ export const AuthProvider:React.FC = ({children}) => {
 				signed: !!user,
 				signIn,
 				signOut,
-				user
+				user:user?user:{} as User,
 			}}
 		>
 			{children}

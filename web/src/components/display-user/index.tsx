@@ -8,7 +8,7 @@ interface DisplayUserProps {
 }
 const DisplayUser: React.FC<DisplayUserProps> = ({name,avatar,alt}) => {
 	return (
-		<Span>
+		<Span href='/Profile'>
 			<Img src={avatar} alt={alt} width="40px" height="40px" />
 			{name}
 		</Span>

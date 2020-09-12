@@ -1,13 +1,9 @@
+import { User } from "../models/user";
 import api from "./api";
 
 interface Response {
 	token: string;
-	user: {
-		name: string;
-		surname: string;
-		email: string;
-		avatar: string;
-	}
+	user: User;
 }
 export function signIn(email: string, password: string): Promise<Response> {
 	return new Promise(resolve => {

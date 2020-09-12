@@ -5,10 +5,12 @@ import {TextCondensed,DivInputCondensed,TogglePassword,InputDefault
     import { LabelCheckbox,CheckboxDefault } from './checkbox';
 import { Label } from '../../assets/styles/styles';
 import { HiOutlineEyeOff,HiOutlineEye } from 'react-icons/hi';
+import InputMask from "react-input-mask";
 
 interface InputProps extends InputHTMLAttributes<HTMLInputElement>{
     label:string;
-    name:string;
+	name:string;
+	mask?:string|RegExp[];
 }
 interface TextAreaProps extends TextareaHTMLAttributes<HTMLTextAreaElement>{
     label:string;
@@ -54,13 +56,17 @@ export const TextArea:React.FunctionComponent<TextAreaProps> = ({label,name, ...
         </InputBlock>
     );
 }
-const Input:React.FunctionComponent<InputProps> = ({label,name, ...rest}) => {
-    return(
-        <InputBlock>
-            <Label htmlFor={name}>{label}</Label>
-            <InputDefault id={name} {...rest}/>
-        </InputBlock>
-    );
+const Input:React.FunctionComponent<InputProps> = ({label,name,mask, ...rest}) => {
+	return (
+		<InputBlock>
+			<Label htmlFor={name}>{label}</Label>
+			{mask ? (
+				<InputMask id={name} mask={mask} className="mask" {...rest} />
+			) : (
+				<InputDefault id={name} {...rest} />
+			)}
+		</InputBlock>
+	);
 }
 export const Checkbox:React.FunctionComponent<InputProps> = ({label,name, ...rest}) => {
     return(

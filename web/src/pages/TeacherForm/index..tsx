@@ -50,9 +50,10 @@ function TeacherForm(){
 
     return (
         <div id="page-teacher-form" className="container">
-            <PageHeader title="Que incrível que você quer dar aulas."
+			<PageHeader
+				page="Dar aulas"
+				title="Que incrível que você quer dar aulas."
                 description="O primeiro passo é preencher esse formulário de inscrição">
-
             </PageHeader>
             <main>
                 <form onSubmit={handleCreateClass}>
@@ -118,13 +119,13 @@ function TeacherForm(){
                     </fieldset>
 
                     <footer>
-                    <p>
-                        <img src={warnIcon} alt="Aviso importante"/>
-                        Importante <br/>
-                        Preencha todos os dados.
-                    </p>
-                    <button type="submit">Salvar cadastrados</button>
-                </footer>
+						<p>
+							<img src={warnIcon} alt="Aviso importante"/>
+							Importante <br/>
+							Preencha todos os dados.
+						</p>
+						<button type="submit">Salvar cadastrados</button>
+               		</footer>
                 </form>
             </main>
         </div>

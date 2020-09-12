@@ -8,6 +8,7 @@ import ResetPassword from './pages/ResetPassword';
 import Home from './pages/Home';
 import Confirm from './pages/Confirm';
 import Register from './pages/Register';
+import Profile from './pages/Profile';
 import { useAuth,getToken } from './contexts/auth';
 interface PrivateRouteProps extends RouteProps {
 	component: any;
@@ -72,6 +73,7 @@ function Routes(){
 				<PrivateRoute path="/home" component={Home} />
 				<PrivateRoute path="/study" component={TeacherList} />
 				<PrivateRoute path="/give-classes" component={TeacherForm} />
+				<PrivateRoute path="/profile" component={Profile} />
 			</Switch>
 		</BrowserRouter>
 	);

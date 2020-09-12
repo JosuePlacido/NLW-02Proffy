@@ -109,9 +109,32 @@ export const FooterCentralized = styled.footer`
   }
 `;
 export const DivPaddingVerticalSpaceBetWeen = styled.span`
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-direction: row;
-    padding: 2rem 0;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	flex-direction: row;
+	padding: 2rem 0;
+`;
+export const LegendInput = styled.legend`
+	font: 700 2.4rem Archivo;
+	color: var(--color-text-title);
+	margin-bottom: 2.4rem;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	width: 100%;
+	padding-bottom: 1.6rem;
+	border-bottom: 1px solid var(--color-line-in-white);
+`;
+export const ButtonText = styled.button`
+	background: none;
+	border: 0;
+	color: var(--color-primary);
+	font: 700 1.6rem Archivo;
+	cursor: pointer;
+	transition: color 0.2s;
+`;
+export const ContainerDefault = styled.div`
+	width: 90vw;
+	max-width: 1000px;
 `;

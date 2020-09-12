@@ -22,7 +22,7 @@ function TeacherList(){
 
     return (
         <div id="page-teacher-list" className="container">
-            <PageHeader title="Estes são os proffys disponíveis">
+            <PageHeader page="Professores" title="Estes são os proffys disponíveis">
                 <form id="search-teachers" onSubmit={SearchTeachers}>
                     <Select label="Matéria" name="subject"
                     value={subject}
@@ -32,7 +32,7 @@ function TeacherList(){
                         {value:'Matematica',text:'Matematica'},
                         {value:'Inglês',text:'Inglês'}
                     ]}
-                    />  
+                    />
                     <Select label="Dia da semana" name="week-day"
                         value={week_day}
                         onChange={e => setWeekDay(e.target.value)}
@@ -45,7 +45,7 @@ function TeacherList(){
                             {value:'5',text:'Sexta-feira'},
                             {value:'6',text:'Sábado'}
                         ]}
-                    />  
+                    />
                     <Input type="time" label="Horário" name="time"
                         value={time}
                         onChange={e => setTime(e.target.value)}/>
