@@ -57,7 +57,6 @@ export default class ClassesController {
 	}
 	async index(request: Request, response: Response) {
 		const filters = request.query;
-
 		const week_day = filters.week_day as string;
 		const time = filters.time as string;
 		const subject = filters.subject as string;
@@ -67,7 +66,7 @@ export default class ClassesController {
 			});
 		}
 		const timeInMinutes = converHourToMinutes(time);
-		const classes = await db("classes")
+		let classes = await db("classes")
 			.whereExists(function () {
 				this.select("class_schedule.*")
 					.from("class_schedule")
@@ -84,7 +83,11 @@ export default class ClassesController {
 			})
 			.where("classes.subject", "=", subject)
 			.join("users", "classes.userId", "=", "users.id")
-			.select(["classes.*", "users.*"]);
+			.select(["classes.*", "users.name", "users.surname", "users.avatar", "users.bio", "users.whatsapp"]);
+			const dao = new ClassScheduleDAO();
+			for(let x=0;x < classes.length;x++){
+				classes[x].schedules = await dao.getAllByClass(classes[x].id);
+			}
 		return response.json(classes);
 	}
 }
