@@ -1,5 +1,5 @@
 #page-teacher-form{
-    width: 100vw;
+    width: 100%;
     height: 100vh;
 }
 #page-teacher-form .page-header .header-content{
@@ -13,7 +13,7 @@
     margin: -3.2rem auto 3.2rem;
     padding-top: 6.4rem;
     overflow: hidden;
-} 
+}
 #page-teacher-form main fieldset{
     border:0;
     padding: 0 .4rem;
@@ -80,7 +80,7 @@
     transition: background-color 0.2s;
     margin-top: 3.2rem;
 }
-#page-teacher-form main footer button:hover{    
+#page-teacher-form main footer button:hover{
     background: var(--color-secundary-dark);
 }
 

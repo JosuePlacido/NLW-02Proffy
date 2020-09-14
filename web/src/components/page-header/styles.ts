@@ -31,7 +31,7 @@ export const Content = styled.div`
 	position: relative;
 	margin: 3.2rem auto;
 	& strong {
-		font: 700 3.6rem Archivo;
+		font: 700 3rem Archivo;
 		line-height: 4.2rem;
 		color: var(--color-title-in-primary);
 	}
@@ -40,16 +40,22 @@ export const Content = styled.div`
 		font-size: 1.6rem;
 		line-height: 2.6rem;
 		color: var(--color-text-in-primary);
-		margin-top: 2.4rem;
 	}
 	@media (min-width: 700px) {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
 		flex: 1;
 		max-width: 740px;
 		margin: 0 auto;
 		padding-bottom: 48px;
-		display: flex;
 		flex-direction: column;
 		justify-content: center;
-		align-items: flex-start;
+		align-items: center;
+	}
+`;
+export const ContentFlex = styled(Content)`
+	display: flex;
+	@media (min-width: 700px) {
+		display: flex;
 	}
 `;
