@@ -34,7 +34,6 @@ export const SmallAvatar = styled(Avatar)`
 	height:40px;
 	margin-right:20px;
 `;
-
 export const FooterDescription = styled.Text`
     font-family:Poppins_400Regular;
     color:#d4c2ff;

@@ -1,5 +1,5 @@
 import React, { ReactNode } from 'react';
-import { Image,View } from 'react-native';
+import { Image,View,Text } from 'react-native';
 import {
 	Container,
 	Title,
@@ -9,12 +9,15 @@ import {
 	IconInBanner,
 	BackgroundBannerOBoard,
 	ContainerOnBoard,
+	Toolbar,
+	ToolbarTitle,
 } from "./styles";
 import {ViewHorizontalCenter} from '../../assets/styles/views';
 import background from '../../assets/images/background.png';
 import background1 from '../../assets/images/onboard1.png';
 import background2 from '../../assets/images/onboard2.png';
 import backIcon from '../../assets/images/icons/back.png';
+import LogoIcon from '../../assets/images/logo.png';
 import Logo from '../../assets/images/PROFFY.png';
 import {BorderlessButton} from 'react-native-gesture-handler';
 import { useNavigation } from '@react-navigation/native';
@@ -60,27 +63,47 @@ export const PageHeaderOnBoardTwo: React.FC = () => {
 		</ContainerOnBoard>
 	);
 };
-const PageHeader:React.FC<PageHeaderProps> = ({title,headerRight,children}) => {
-    const navigation = useNavigation();
-    function handleGoBack(){
-        navigation.navigate('Landing');
-    }
-    return (
-        <Container>
-            <ViewHorizontalCenter>
-                <BorderlessButton onPress={handleGoBack}>
-                    <Image source={backIcon} resizeMode="contain" />
-                </BorderlessButton>
-                <Image source={Logo} resizeMode="contain" />
-            </ViewHorizontalCenter>
-            <ViewHorizontalCenter>
-                <Title>
-                    {title}
-                </Title>
-                {headerRight}
-            </ViewHorizontalCenter>
-            {children}
-        </Container>
-    );
-}
+const PageHeader: React.FC<PageHeaderProps> = ({
+	title,
+	headerRight,
+	children,
+}) => {
+	const navigation = useNavigation();
+	function handleGoBack() {
+		navigation.navigate("Landing");
+	}
+	return (
+		<Container>
+			<ViewHorizontalCenter>
+				<BorderlessButton onPress={handleGoBack}>
+					<Image source={backIcon} resizeMode="contain" />
+				</BorderlessButton>
+				<Image source={LogoIcon} resizeMode="contain" />
+			</ViewHorizontalCenter>
+			<ViewHorizontalCenter>
+				<Title>{title}</Title>
+				{headerRight}
+			</ViewHorizontalCenter>
+			{children}
+		</Container>
+	);
+};
+export const PageHeaderProfile: React.FC = ({ title, headerRight, children }) => {
+	const navigation = useNavigation();
+	function handleGoBack() {
+		navigation.navigate("Landing");
+	}
+	return (
+		<Container>
+			<Toolbar>
+				<BorderlessButton onPress={handleGoBack}>
+					<Image source={backIcon} resizeMode="contain" />
+				</BorderlessButton>
+				<ToolbarTitle>Meu perfil</ToolbarTitle>
+				<Image source={LogoIcon} resizeMode="contain" />
+			</Toolbar>
+			{children}
+		</Container>
+	);
+};
 export default PageHeader;

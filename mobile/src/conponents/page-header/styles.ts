@@ -1,6 +1,6 @@
 import {StyleSheet} from 'react-native';
 import styled from 'styled-components/native';
-import { ContainerPrimary } from "../../assets/styles/views";
+import { ContainerPrimary, ViewHorizontalCenter, ViewHorizontalCenterPadding } from "../../assets/styles/views";
 export const TextDescription = styled.Text`
     font-family:Poppins_400Regular;
     color:#f4c2ff;
@@ -8,7 +8,6 @@ export const TextDescription = styled.Text`
 `;
 export const Container = styled.View`
     background-color:#8258e5;
-    padding: 40px;
 `;
 export const ContainerOnBoard = styled(ContainerPrimary)<{ color?: string }>`
 	background-color: ${(props) => props.color || "#8258e5"};
@@ -48,4 +47,14 @@ export const TitleInBanner = styled(TextDescription)`
     font-size:13px;
     width: 200px;
     justify-content:flex-start;
+`;
+export const Toolbar = styled(ViewHorizontalCenter)`
+	background-color:#774DD6;
+	align-items:center;
+	padding:10px 20px;
+`;
+export const ToolbarTitle = styled.Text`
+    font-family:Poppins_400Regular;
+    color:#f4c2ff;
+    font-size:13px;
 `;

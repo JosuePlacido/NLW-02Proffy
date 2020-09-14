@@ -55,6 +55,9 @@ function Landing(){
     function handleNavigateToStudyPage(){
         navigation.navigate('StudyTabs');
     }
+    function handleProfile(){
+        navigation.navigate('Profile');
+    }
     function handleLogout(){
         signOut();
     }
@@ -62,18 +65,16 @@ function Landing(){
 		<ContainerDefault>
 			<ContainerHeader>
 				<ViewHorizontalCenter>
-					<ViewHorizontalCenter>
-						<SmallAvatar source={{ uri: avatar }} />
-						<DescriptionPrimarySmall>
-							{name}
-						</DescriptionPrimarySmall>
-					</ViewHorizontalCenter>
+					<RectButton onPress={handleProfile}>
+						<ViewHorizontalCenter>
+							<SmallAvatar source={{ uri: avatar }} />
+							<DescriptionPrimarySmall>
+								{name}
+							</DescriptionPrimarySmall>
+						</ViewHorizontalCenter>
+					</RectButton>
 					<Logout onPress={handleLogout}>
-						<Ionicons
-							name="ios-power"
-							color="#d4c2ff"
-							size={24}
-						/>
+						<Ionicons name="ios-power" color="#d4c2ff" size={24} />
 					</Logout>
 				</ViewHorizontalCenter>
 				<Banner source={landingImg} />

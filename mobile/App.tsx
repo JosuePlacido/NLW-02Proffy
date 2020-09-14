@@ -32,7 +32,6 @@ export default function App() {
 		<NavigationContainer>
 			<AuthProvider>
 			<FirstLaunchProvider>
-				<StatusBar style="light"/>
 				<Routes />
 			</FirstLaunchProvider>
 			</AuthProvider>

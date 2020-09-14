@@ -14,3 +14,10 @@ export const Banner = styled.Image`
     width:100%;
     resize-mode:contain;
 `;
+export const BackgroundBanner = styled.ImageBackground`
+	height:200px;
+	background-color: #8258e5;
+	padding-top: 20px;
+	align-items: center;
+	justify-content: center;
+`;
