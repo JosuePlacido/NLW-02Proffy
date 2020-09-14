@@ -1,5 +1,9 @@
-import {StyleSheet} from 'react-native';
+import {StyleSheet,View} from 'react-native';
+import styled from 'styled-components';
 
+export const ViewUser = styled.View`
+	flex-direction:row;
+`;
 const styles = StyleSheet.create({
     formClass:{
         marginTop:-40,
@@ -32,7 +36,7 @@ const styles = StyleSheet.create({
         padding:20,
         margin:-20
     },
-    footerWarn:{        
+    footerWarn:{
         flexDirection:'row',
         alignItems:'center',
         justifyContent:'space-evenly',

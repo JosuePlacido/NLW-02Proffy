@@ -1,4 +1,9 @@
 import styled from 'styled-components/native';
+
+export const ViewPadding = styled.View`
+	padding:0 20px;
+	padding-bottom:30px;
+`;
 export const ContainerDefault = styled.View`
     flex:1;
     background-color:#f0f0f7;

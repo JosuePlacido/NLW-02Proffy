@@ -6,6 +6,11 @@ export const TextDescription = styled.Text`
     color:#f4c2ff;
     margin-bottom:30px;
 `;
+export const ViewHorizontalCenterPaddingHorizontal = styled(
+	ViewHorizontalCenterPadding
+)`
+	padding: 0 20px;
+`;
 export const Container = styled.View`
     background-color:#8258e5;
 `;

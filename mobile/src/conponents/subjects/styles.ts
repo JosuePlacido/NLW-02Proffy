@@ -4,15 +4,15 @@ import { StyleSheet } from 'react-native';
 const styles = StyleSheet.create({
 	scheduleView: {
 		paddingTop: 40,
-		borderBottomWidth:1,
-		borderBottomColor: 'blue'
+		borderBottomWidth: 1,
+		borderBottomColor: "#e6e6f0",
 	},
-	buttonRemove:{
-		backgroundColor: '#fff',
-		alignSelf: 'center',
+	buttonRemove: {
+		backgroundColor: "#fff",
+		alignSelf: "center",
 		paddingHorizontal: 20,
-		marginBottom: -10
-	}
+		marginBottom: -10,
+	},
 });
 
 export const TextButtonNovo = styled.Text`

@@ -11,8 +11,12 @@ import {
 	ContainerOnBoard,
 	Toolbar,
 	ToolbarTitle,
+	ViewHorizontalCenterPaddingHorizontal,
 } from "./styles";
-import {ViewHorizontalCenter} from '../../assets/styles/views';
+import {
+	ViewHorizontalCenter,
+	ViewHorizontalCenterPadding,
+} from "../../assets/styles/views";
 import background from '../../assets/images/background.png';
 import background1 from '../../assets/images/onboard1.png';
 import background2 from '../../assets/images/onboard2.png';
@@ -25,11 +29,15 @@ import { Background } from '../../assets/styles/images';
 import { DescriptionPrimary } from '../../assets/styles/texts';
 import studyIcon from "../../assets/images/icons/study.png";
 import giveClassesICon from "../../assets/images/icons/give-classes.png";
-interface PageHeaderProps {
+interface PageHeaderProfileProps {
     title:string;
     headerRight?:ReactNode;
 }
-
+interface PageHeaderProps {
+	title: string;
+	description: string;
+	headerRight?: ReactNode;
+}
 export const PageHeaderLogo:React.FC = () =>{
     return (
 		<BackgroundBanner source={background} resizeMode="cover">
@@ -65,30 +73,10 @@ export const PageHeaderOnBoardTwo: React.FC = () => {
 };
 const PageHeader: React.FC<PageHeaderProps> = ({
 	title,
+	description,
 	headerRight,
 	children,
 }) => {
-	const navigation = useNavigation();
-	function handleGoBack() {
-		navigation.navigate("Landing");
-	}
-	return (
-		<Container>
-			<ViewHorizontalCenter>
-				<BorderlessButton onPress={handleGoBack}>
-					<Image source={backIcon} resizeMode="contain" />
-				</BorderlessButton>
-				<Image source={LogoIcon} resizeMode="contain" />
-			</ViewHorizontalCenter>
-			<ViewHorizontalCenter>
-				<Title>{title}</Title>
-				{headerRight}
-			</ViewHorizontalCenter>
-			{children}
-		</Container>
-	);
-};
-export const PageHeaderProfile: React.FC = ({ title, headerRight, children }) => {
 	const navigation = useNavigation();
 	function handleGoBack() {
 		navigation.navigate("Landing");
@@ -99,7 +87,32 @@ export const PageHeaderProfile: React.FC = ({ title, headerRight, children }) =>
 				<BorderlessButton onPress={handleGoBack}>
 					<Image source={backIcon} resizeMode="contain" />
 				</BorderlessButton>
-				<ToolbarTitle>Meu perfil</ToolbarTitle>
+				<ToolbarTitle>{title}</ToolbarTitle>
+				<Image source={LogoIcon} resizeMode="contain" />
+			</Toolbar>
+			<ViewHorizontalCenterPaddingHorizontal>
+				<Title>{description}</Title>
+				{headerRight}
+			</ViewHorizontalCenterPaddingHorizontal>
+			{children}
+		</Container>
+	);
+};
+export const PageHeaderProfile: React.FC<PageHeaderProfileProps> = ({
+	title,
+	children,
+}) => {
+	const navigation = useNavigation();
+	function handleGoBack() {
+		navigation.navigate("Landing");
+	}
+	return (
+		<Container>
+			<Toolbar>
+				<BorderlessButton onPress={handleGoBack}>
+					<Image source={backIcon} resizeMode="contain" />
+				</BorderlessButton>
+				<ToolbarTitle>{title}</ToolbarTitle>
 				<Image source={LogoIcon} resizeMode="contain" />
 			</Toolbar>
 			{children}
