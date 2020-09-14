@@ -17,23 +17,28 @@ export default function TeacherList(){
     const [week_day,setWeekDay] =  useState('');
     const [time,setTime] =  useState('');
     const [teachers,setTeachers] = useState([
-        {            
-            id: 1,
-            avatar: 'http://github.com/JosuePlacido.png',
-            bio: 'bio',
-            cost: 100,
-            name: 'Josue Placido',
-            subject: 'Artes',
-            whatsapp: '45991091914'
-        },
-        {            
+        {
             id: 2,
             avatar: 'http://github.com/JosuePlacido.png',
             bio: 'bio',
             cost: 100,
             name: 'Josue Placido',
             subject: 'Artes',
-            whatsapp: '45991091914'
+			whatsapp: '45991091914',
+			schedules:[
+				{
+					id:1,
+					from:'00:00',
+					to:'23:00',
+					week_day:'1',
+				},
+				{
+					id:2,
+					from:'00:00',
+					to:'23:00',
+					week_day:'0',
+				}
+			]
         }
     ]);
     const [favorites,setFavorites] = useState<number[]>([]);
@@ -52,7 +57,7 @@ export default function TeacherList(){
     function handleFiltersVisible(){
         setFiltersVisible(!filtersVisible);
     }
-    
+
     async function handleFiltersSubmit(){
         LoadFavorites();
         const response = await api.get('classes',{

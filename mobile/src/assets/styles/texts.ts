@@ -48,7 +48,13 @@ export const Archivo40Light = styled.Text`
 	font-family: Archivo_700Bold;
 	color: #dbd9e4;
 	font-size: 40px;
-`;export const Poppins24Base = styled.Text`
+`;
+export const Archivo16SecondaryText = styled.Text`
+	font-family: Archivo_700Bold;
+	color: #646180;
+	font-size: 16px;
+`;
+export const Poppins24Base = styled.Text`
 	font-family: Poppins_400Regular;
 	color: #646180;
 	font-size: 24px;
