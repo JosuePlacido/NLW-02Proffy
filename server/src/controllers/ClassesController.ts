@@ -8,28 +8,18 @@ import ClassScheduleDAO from '../database/dao/class_schedule';
 export default class ClassesController {
 	async create(request: Request, response: Response) {
 		const {
-			name,
-			avatar,
-			whatsapp,
-			bio,
 			subject,
 			cost,
 			schedule,
+			userId
 		} = request.body;
 
 		const trx = await db.transaction();
 		try {
-			const insertedUserIds = await trx("users").insert({
-				name,
-				avatar,
-				whatsapp,
-				bio,
-			});
-
 			const insertedClassesIds = await trx("classes").insert({
 				subject,
 				cost,
-				userId: insertedUserIds[0],
+				userId,
 			});
 
 			const class_schedule = schedule.map((si: ScheduleItem) => {
