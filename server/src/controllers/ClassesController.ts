@@ -60,6 +60,7 @@ export default class ClassesController {
 		const week_day = filters.week_day as string;
 		const time = filters.time as string;
 		const subject = filters.subject as string;
+		const page = filters.page as string;
 		if (!filters.week_day || !filters.subject || !filters.time) {
 			return response.status(400).json({
 				eror: "preencha todos os parametros para filtrar",
@@ -83,7 +84,16 @@ export default class ClassesController {
 			})
 			.where("classes.subject", "=", subject)
 			.join("users", "classes.userId", "=", "users.id")
-			.select(["classes.*", "users.name", "users.surname", "users.avatar", "users.bio", "users.whatsapp"]);
+			.select([
+				"classes.*",
+				"users.name",
+				"users.surname",
+				"users.avatar",
+				"users.bio",
+				"users.whatsapp",
+			])
+			.limit(page?10:-1)
+			.offset(1*(page?parseInt(page):0));
 			const dao = new ClassScheduleDAO();
 			for(let x=0;x < classes.length;x++){
 				classes[x].schedules = await dao.getAllByClass(classes[x].id);
