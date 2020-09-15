@@ -6,10 +6,8 @@ export const TextDescription = styled.Text`
     color:#f4c2ff;
     margin-bottom:30px;
 `;
-export const ViewHorizontalCenterPaddingHorizontal = styled(
-	ViewHorizontalCenterPadding
-)`
-	padding: 0 20px;
+export const ViewHorizontalCenterPaddingHorizontal = styled(ViewHorizontalCenterPadding)`
+	padding: 20px;
 `;
 export const Container = styled.View`
     background-color:#8258e5;
@@ -23,8 +21,8 @@ export const Title = styled.Text`
     font-family:Archivo_700Bold;
     color:#fff;
     font-size:24px;
-    line-height:32px;
-    flex:1;
+	line-height:32px;
+	max-width:60%;
     margin:15px 0;
 `;
 export const BackgroundBanner = styled.ImageBackground`

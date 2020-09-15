@@ -12,3 +12,9 @@ export const ScrollViewDefault = styled.ScrollView`
     padding: 0 16px;
     padding-bottom:16px;
 `;
+export const ViewRight = styled.View`
+	flex-direction: row;
+	align-items: center;
+	justify-content: flex-end;
+	width: 35%;
+`;

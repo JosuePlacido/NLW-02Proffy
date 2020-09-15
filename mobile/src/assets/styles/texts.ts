@@ -59,3 +59,9 @@ export const Poppins24Base = styled.Text`
 	color: #646180;
 	font-size: 24px;
 `;
+export const DescriptionHeaderSmall = styled.Text`
+    color: #d4c2ff;
+    font-size: 12px;
+	font-family:Poppins_400Regular;
+	margin-left:10px;
+`;
