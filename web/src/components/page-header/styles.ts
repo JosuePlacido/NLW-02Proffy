@@ -27,7 +27,6 @@ export const Container = styled.header`
 `;
 export const Content = styled.div`
 	width: 100%;
-	margin: 0 auto;
 	position: relative;
 	margin: 3.2rem auto;
 	& strong {
@@ -37,9 +36,16 @@ export const Content = styled.div`
 	}
 	& p {
 		max-width: 30rem;
-		font-size: 1.6rem;
-		line-height: 2.6rem;
+		font-size: 1.4rem;
+		text-align: left;
+		display: flex;
+		justify-content: flex-end;
+		align-items: center;
+		font-weight:300;
 		color: var(--color-text-in-primary);
+	}
+	& p img {
+		margin-right: 2rem;
 	}
 	@media (min-width: 700px) {
 		display: grid;
@@ -48,13 +54,15 @@ export const Content = styled.div`
 		max-width: 740px;
 		margin: 0 auto;
 		padding-bottom: 48px;
-		flex-direction: column;
 		justify-content: center;
 		align-items: center;
 	}
 `;
 export const ContentFlex = styled(Content)`
 	display: flex;
+	& p {
+		text-align:center;
+	}
 	@media (min-width: 700px) {
 		display: flex;
 	}

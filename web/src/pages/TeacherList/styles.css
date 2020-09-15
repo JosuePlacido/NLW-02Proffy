@@ -5,7 +5,7 @@
 #search-teachers{
     margin-top: 3.2rem;
 }
-#search-teachers button{    
+#search-teachers button{
     width:100%;
     height: 5.6rem;
     background: var(--color-secundary);
@@ -18,9 +18,9 @@
     justify-content: center;
     align-items: center;
     transition: background-color 0.2s;
-    margin-top: 3.2rem;
+    margin-top: auto;
 }
-#search-teachers button:hover{      
+#search-teachers button:hover{
     background: var(--color-secundary-dark);
 }
 #search-teachers label{
@@ -42,10 +42,6 @@
         bottom: -28px;
     }
 
-    #search-teachers .select-block + .select-block {
-     margin-top: 0;
-   }
- 
    #page-teacher-list main {
      padding: 3.2rem 0;
      max-width: 740px;
