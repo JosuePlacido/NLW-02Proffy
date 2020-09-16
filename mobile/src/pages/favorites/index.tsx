@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from "react";
 import { View, ScrollView, AsyncStorage, Image, Text } from "react-native";
 import {SearchForm,LabelInPrimary,ScrollViewDefault,ViewRight} from './styles';
 import {ContainerDefault,ViewHorizontalCenter,ViewSubGroup} from '../../assets/styles/views';
@@ -7,19 +7,16 @@ import TeacherItem, { Teacher } from '../../conponents/teacher-item';
 import { useFocusEffect } from '@react-navigation/native';
 import { DescriptionHeaderSmall } from "../../assets/styles/texts";
 import emoji from "../../assets/images/icons/Favorito.png";
+import {FavoriteProvider,useFavorites} from '../../contexts/favorites';
+import {useAuth} from '../../contexts/auth';
+import { Favorite } from "../../models/favorites";
 export default function Favorites(){
-    const [favorites,setFavorites] = useState([]);
-
-    useFocusEffect(LoadFavorites);
-
-    function LoadFavorites(){
-        AsyncStorage.getItem('favorites').then(response => {
-            if(response){
-                const favoritedTeachers = JSON.parse(response);
-                setFavorites(favoritedTeachers);
-            }
-        });}
-    return (
+	const {favorites,LoadFavorites} = useFavorites();
+	const { user } = useAuth();
+	useEffect(() => {
+		user && LoadFavorites(user.id);
+	},[]);
+	return (
 		<ContainerDefault>
 			<PageHeader
 				title="Estudar"
@@ -33,14 +30,20 @@ export default function Favorites(){
 					</ViewRight>
 				}
 			>
-				<View><Text>{' '}</Text></View>
+				<View>
+					<Text></Text>
+				</View>
 			</PageHeader>
 			<ScrollViewDefault>
-				{favorites.map((t: Teacher) => {
-					return (
-						<TeacherItem key={t.id} teacher={t} favorited={true} />
-					);
-				})}
+				{favorites &&
+					favorites.map(({ item }: Favorite,index:number) => {
+						return (
+							<TeacherItem
+								key={index}
+								teacher={item}
+							/>
+						);
+					})}
 			</ScrollViewDefault>
 		</ContainerDefault>
 	);

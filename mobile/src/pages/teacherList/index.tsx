@@ -36,6 +36,8 @@ import AsyncStorage from '@react-native-community/async-storage';
 import { useFocusEffect } from '@react-navigation/native';
 import emoji from '../../assets/images/icons/Encontrado.png'
 import PickerDefault from '../../conponents/picker';
+import { useFavorites } from "../../contexts/favorites";
+import { useAuth } from "../../contexts/auth";
 export default function TeacherList(){
     const [filtersVisible,setFiltersVisible] = useState(false);
     const [subject,setSubject] = useState('Artes');
@@ -46,17 +48,11 @@ export default function TeacherList(){
     const [page,setPage] =  useState(0);
     const [teachers,setTeachers] = useState<Teacher[]>([]);
     const [favorites,setFavorites] = useState<number[]>([]);
-
-    //useEffect(LoadFavorites,[]);
-
-    function LoadFavorites(){
-        AsyncStorage.getItem('favorites').then(response => {
-            if(response){
-                const favoritedTeachers = JSON.parse(response);
-                const favoritedTeachersIDs = favoritedTeachers.map((t:Teacher) => t.id);
-                setFavorites(favoritedTeachersIDs);
-            }
-        });}
+    const { LoadFavorites } = useFavorites();
+	const { user } = useAuth();
+	useEffect(() => {
+		user && LoadFavorites(user.id);
+	},[]);
 
     function handleFiltersVisible(){
         setFiltersVisible(!filtersVisible);
@@ -81,9 +77,8 @@ export default function TeacherList(){
 	}
     async function handleFiltersSubmit() {
 		setLoading(true);
-		LoadFavorites();
+		//LoadFavorites();
 		setPage(1);
-		setFully(false);
 		const response = await api.get("classes", {
 			params: {
 				subject,
@@ -94,6 +89,11 @@ export default function TeacherList(){
 		});
 		setFiltersVisible(false);
 		setTeachers(response.data);
+		if (response.data.length > 10) {
+			setFully(false);
+		}else{
+			setFully(true);
+		}
 		setLoading(false);
 	}
     return (
@@ -128,7 +128,6 @@ export default function TeacherList(){
 							placeholder="Matéria"
 							selectedValue={subject}
 							onValueChange={(e: string) => {
-								console.log(e);
 								setSubject(e);
 							}}
 						>
@@ -202,7 +201,6 @@ export default function TeacherList(){
 				renderItem={({ item }: { item: Teacher }) => (
 					<TeacherItem
 						teacher={item}
-						favorited={favorites.includes(item.id)}
 					/>
 				)}
 				onEndReached={LoadMoreProffys}

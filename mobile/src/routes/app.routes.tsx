@@ -6,7 +6,6 @@ import GiveClasses from '../pages/give-classes';
 import Profile from '../pages/profile';
 import StudyTabs from './studyTabs';
 import Confirm from '../pages/confirm';
-
 const {Navigator,Screen} = createStackNavigator();
 
 function AppRoutes(){

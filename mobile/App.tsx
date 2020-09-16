@@ -15,10 +15,12 @@ import { StatusBar } from "expo-status-bar";
 
 import { AuthProvider, useAuth } from "./src/contexts/auth";
 import { useFirstLaunch,FirstLaunchProvider } from "./src/contexts/firstLaunch";
+import { FavoriteProvider,useFavorites } from "./src/contexts/favorites";
 import Routes from "./src/routes/index";
 
 export default function App() {
     const { loading } = useAuth();
+    //const { LoadFavorites } = useFavorites();
 	const [fontsLoaded] = useFonts({
 		Archivo_400Regular,
 		Archivo_700Bold,
@@ -31,9 +33,11 @@ export default function App() {
 	return (
 		<NavigationContainer>
 			<AuthProvider>
-			<FirstLaunchProvider>
-				<Routes />
-			</FirstLaunchProvider>
+				<FirstLaunchProvider>
+					<FavoriteProvider>
+						<Routes />
+					</FavoriteProvider>
+				</FirstLaunchProvider>
 			</AuthProvider>
 		</NavigationContainer>
 	);

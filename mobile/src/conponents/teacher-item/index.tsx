@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import {View,Image,Text, Linking,TouchableOpacity} from 'react-native';
 import {
 	ViewProfileInfo,
@@ -28,6 +28,8 @@ import { Avatar } from '../../assets/styles/images';
 import { ContainerItem,ViewHorizontalCenterPadding
     ,ViewHorizontalCenter, ItemFooter } from '../../assets/styles/views';
 import { ClassSchedule } from '../../models/class_schedule';
+import {useFavorites} from '../../contexts/favorites';
+import {useAuth} from '../../contexts/auth';
 export interface Teacher {
 	id: number;
 	avatar: string;
@@ -40,11 +42,16 @@ export interface Teacher {
 }
   export interface TeacherItemProps{
     teacher: Teacher;
-    favorited:boolean;
   }
 const days = ['Domingo','Segunda','Terça','Quarta','Quinta','Sexta','Sabado'];
-const TeacherItem:React.FC<TeacherItemProps>= ({teacher,favorited}) => {
-    const [isFavorited,setIsFavorited] =  useState(favorited);
+const TeacherItem:React.FC<TeacherItemProps>= ({teacher}) => {
+    const [isFavorited,setIsFavorited] =  useState(true);
+    const { addFavorite, remove, favoritesId } = useFavorites();
+	const {user} =  useAuth();
+
+	useEffect(() => {
+		setIsFavorited(favoritesId.includes(teacher.id))}, [favoritesId]);
+
     function handleLinkToWhatsApp(){
         Linking.openURL(`whatsapp://send?phone=${teacher.whatsapp}`);
         api.post('connections',{
@@ -52,22 +59,13 @@ const TeacherItem:React.FC<TeacherItemProps>= ({teacher,favorited}) => {
         });
     }
     async function handleFavorite(){
-        const favorites = await AsyncStorage.getItem('favorites');
-        let favoritesArray = [];
-        if(favorites){
-            favoritesArray = JSON.parse(favorites);
-        }
-        if(isFavorited){
-            const favoriteIndex= favoritesArray.findIndex((t:Teacher) => {
-                return t.id === teacher.id;
-            });
-            favoritesArray.splice(favoriteIndex,1);
-            setIsFavorited(false);
-        }else{
-            favoritesArray.push(teacher);
-            setIsFavorited(true);
-        }
-        await AsyncStorage.setItem('favorites',JSON.stringify(favoritesArray));
+        if (isFavorited) {
+			await remove(user.id, teacher.id);
+			setIsFavorited(false);
+		} else {
+			await addFavorite(user.id, teacher.id);
+			setIsFavorited(true);
+		}
     }
 
     return (
@@ -87,8 +85,8 @@ const TeacherItem:React.FC<TeacherItemProps>= ({teacher,favorited}) => {
 					<TextHeaderSchedule>Horário</TextHeaderSchedule>
 				</ViewHeaderSchedule>
 				{teacher.schedules &&
-					teacher.schedules.map(({ id, week_day, from, to }) => (
-						<ViewScheduleItem key={id}>
+					teacher.schedules.map(({ id, week_day, from, to },index) => (
+						<ViewScheduleItem key={index}>
 							<Archivo16SecondaryText>{days[parseInt(week_day)]}</Archivo16SecondaryText>
 							<Image source={nextIcon} resizeMode="contain" />
 							<Archivo16SecondaryText>

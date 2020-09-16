@@ -102,7 +102,6 @@ export default function Profile(){
 			setBio(user.bio);
 			api.get(`class-schedule?id=${user.id}`).then((response) => {
 				const subjectsResult = response.data;
-				console.log(subjectsResult);
 				setSubjects(subjectsResult);
 			});
 		}

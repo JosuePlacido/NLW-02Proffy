@@ -31,7 +31,7 @@ function StudyTabs(){
         activeBackgroundColor:'#ebevf5',
         inactiveTintColor:'#c1bccc',
         activeTintColor:'#32264d'
-        }}>            
+        }}>
             <Screen name="TeacherList" component={TeacherList}
              options={{
                 tabBarLabel:'Proffys',
@@ -52,6 +52,6 @@ function StudyTabs(){
             }}/>
         </Navigator>
     );
-} 
+}
 
 export default StudyTabs;
