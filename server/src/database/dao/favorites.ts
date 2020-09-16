@@ -9,7 +9,7 @@ export default class FavoritesDAO {
 	async create(favorite: Favorites) {
 		return await db("favorites").insert(favorite);
 	}
-	async delete(favorite: number) {
-		return await db("favorites").where('id','=',favorite).delete();
+	async delete(userId: number,classId:number) {
+		return await db("favorites").where("user", "=", userId).andWhere('class','=',classId).delete();
 	}
 }
