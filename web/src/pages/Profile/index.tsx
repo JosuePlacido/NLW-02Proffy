@@ -3,7 +3,7 @@ import { useHistory } from "react-router-dom";
 import warnIcon from "../../assets/images/icons/warning.svg";
 import headerLogo from "../../assets/images/background.svg";
 import PageHeader from "../../components/page-header";
-import Input, { TextArea, Select } from "../../components/input";
+import Input, { TextArea } from "../../components/input";
 import Subject from "../../components/subjects";
 import "./styles.css";
 import {

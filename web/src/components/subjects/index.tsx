@@ -6,7 +6,8 @@ import {
 	ScheduleItem,
 	ButtonRemoveScheduleItem,
 } from "../../pages/Profile/styles";
-import Input, { TextArea, Select } from "../../components/input";
+import Input, { TextArea, SelectInput } from "../../components/input";
+import { DaysOptions, DaysNames } from "../../models/days";
 import * as styles from "../../assets/styles/styles";
 
 export interface SubjectItemProps {
@@ -28,30 +29,26 @@ const Subject: React.FC<SubjectItemProps> = ({
 			<FieldsetAula key={subject.id}>
 				<styles.LegendInput> Sobre a aula</styles.LegendInput>
 				<span>
-					<Select
+					<SelectInput
 						label="Matéria"
 						name="subject"
 						disabled
-						value={subject.subject}
-						onChange={(e) => {
-							costEvent(
-								subject.id,
-								e.target.name,
-								e.target.value
-							);
+						initialValue={{
+							label: subject.subject,
+							value: subject.subject,
 						}}
 						options={[
 							{
 								value: "Artes",
-								text: "Artes",
+								label: "Artes",
 							},
 							{
 								value: "Matematica",
-								text: "Matematica",
+								label: "Matematica",
 							},
 							{
 								value: "Inglês",
-								text: "Inglês",
+								label: "Inglês",
 							},
 						]}
 					/>
@@ -77,45 +74,35 @@ const Subject: React.FC<SubjectItemProps> = ({
 				</styles.LegendInput>
 				{subject.schedules.map((schedule, index) => (
 					<ScheduleItem key={index}>
-						<Select
+						<SelectInput
 							label="Dia da semana"
 							name="week-day"
-							value={schedule.week_day}
-							onChange={
-								(e) =>update(subject.id,index,'week_day',e.target.value)
+							initialValue={{
+								label: DaysNames[parseInt(schedule.week_day)],
+								value: schedule.week_day,
+							}}
+							onChange={(e) =>
+								update(
+									subject.id,
+									index,
+									"week_day",
+									e.target.value
+								)
 							}
-							options={[
-								{ value: "0", text: "Domingo" },
-								{
-									value: "1",
-									text: "Segunda-feira",
-								},
-								{
-									value: "2",
-									text: "Terça-feira",
-								},
-								{
-									value: "3",
-									text: "Quarta-feira",
-								},
-								{
-									value: "4",
-									text: "Quinta-feira",
-								},
-								{
-									value: "5",
-									text: "Sexta-feira",
-								},
-								{ value: "6", text: "Sábado" },
-							]}
+							options={DaysOptions}
 						/>
 						<Input
 							name="from"
 							label="Das"
 							type="time"
 							value={schedule.from}
-							onChange={
-								(e) => update(subject.id,index,'from',e.target.value)
+							onChange={(e) =>
+								update(
+									subject.id,
+									index,
+									"from",
+									e.target.value
+								)
 							}
 						/>
 						<Input
@@ -123,8 +110,8 @@ const Subject: React.FC<SubjectItemProps> = ({
 							label="Até"
 							type="time"
 							value={schedule.to}
-							onChange={
-								(e) => update(subject.id,index,'to',e.target.value)
+							onChange={(e) =>
+								update(subject.id, index, "to", e.target.value)
 							}
 						/>
 						<span>

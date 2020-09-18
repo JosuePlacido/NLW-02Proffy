@@ -1,16 +1,17 @@
-import React,{useState, FormEvent} from 'react';
+import React,{useState, FormEvent,useRef} from 'react';
 import {useHistory} from 'react-router-dom';
 import warnIcon from '../../assets/images/icons/warning.svg';
 import rocketIcon from "../../assets/images/icons/rocket.svg";
 import { PageHeaderForm } from "../../components/page-header";
-import Input,{TextArea,Select} from '../../components/input';
+import Input,{TextArea,SelectInput} from '../../components/input';
 import './styles.css';
 import { DisplayUser, DescriptionIcon } from "./styles";
 import api from '../../services/api';
 import { useAuth } from "../../contexts/auth";
 function TeacherForm(){
 	const { user } = useAuth();
-    const history = useHistory();
+	const history = useHistory();
+	const refSubject = useRef<HTMLInputElement>();
     const [subject,setSubject] = useState('');
     const [cost,setCost] = useState('');
     const [scheduleItems,setScheduleItems] = useState([{ week_day:'0', from:'',to:'' }]);
@@ -33,7 +34,10 @@ function TeacherForm(){
         setScheduleItems(updateScheduleItems);
     }
     function handleCreateClass(e:FormEvent){
-        api.post('classes',{
+        e.preventDefault();
+		const subject = refSubject.current?refSubject.current.value:'';
+		return;
+		api.post('classes',{
 			userId:user.id,
 			subject,
 			cost:Number(cost)
@@ -49,7 +53,6 @@ function TeacherForm(){
 			});
         })
         .catch(() => alert('Erro no cadastro.'));
-        e.preventDefault();
     }
 
     return (
@@ -57,10 +60,7 @@ function TeacherForm(){
 			<PageHeaderForm
 				page="Dar aulas"
 				title="Que incrível que você quer dar aulas."
-				description={
-					<p>
-					</p>
-				}
+				description={<p></p>}
 			>
 				<p>
 					"O primeiro passo é preencher esse formulário de inscrição"
@@ -90,17 +90,14 @@ function TeacherForm(){
 					</fieldset>
 					<fieldset>
 						<legend> Sobre a aula</legend>
-						<Select
+						<SelectInput
 							label="Matéria"
 							name="subject"
-							value={subject}
-							onChange={(e) => {
-								setSubject(e.target.value);
-							}}
+							refInput={refSubject}
 							options={[
-								{ value: "Artes", text: "Artes" },
-								{ value: "Matematica", text: "Matematica" },
-								{ value: "Inglês", text: "Inglês" },
+								{ value: "Artes", label: "Artes" },
+								{ value: "Matematica", label: "Matematica" },
+								{ value: "Inglês", label: "Inglês" },
 							]}
 						/>
 						<Input
@@ -121,26 +118,26 @@ function TeacherForm(){
 							</button>
 						</legend>
 						{scheduleItems.map((si, index) => (
-							<div key={si.week_day} className="schedule-item">
-								<Select
+							<div key={index} className="schedule-item">
+								<SelectInput
 									label="Dia da semana"
 									name="week-day"
 									value={si.week_day}
-									onChange={(e) =>
+									changeState={(e) =>
 										setScheduleItemValue(
 											index,
 											"week_day",
-											e.target.value
+											e.value
 										)
 									}
 									options={[
-										{ value: "0", text: "Domingo" },
-										{ value: "1", text: "Segunda-feira" },
-										{ value: "2", text: "Terça-feira" },
-										{ value: "3", text: "Quarta-feira" },
-										{ value: "4", text: "Quinta-feira" },
-										{ value: "5", text: "Sexta-feira" },
-										{ value: "6", text: "Sábado" },
+										{ value: "0", label: "Domingo" },
+										{ value: "1", label: "Segunda-feira" },
+										{ value: "2", label: "Terça-feira" },
+										{ value: "3", label: "Quarta-feira" },
+										{ value: "4", label: "Quinta-feira" },
+										{ value: "5", label: "Sexta-feira" },
+										{ value: "6", label: "Sábado" },
 									]}
 								/>
 								<Input

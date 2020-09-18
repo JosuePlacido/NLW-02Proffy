@@ -117,3 +117,70 @@ export const SelectDefault = styled.select`
     padding: 0 1.6rem;
     font: 1.6rem Archivo;
 `;
+
+interface UlPopupSelect {
+  display?: string;
+}
+export const UlSelect = styled.ul<UlPopupSelect>`
+	display: ${(props) => props.display};
+	background-color: var(--color-input-background);
+	z-index:100;
+	position: absolute;
+	overflow-y: auto;
+	max-height:300px;
+	width: 100%;
+	& li {
+		padding: 0.8rem 2.5rem;
+		list-style: none;
+		border: solid 1px var(--color-line-in-white);
+		border-left: solid 5px var(--color-input-background);
+		&:hover {
+			border-left: solid 5px var(--color-primary);
+			background-color: var(--color-line-in-white);
+			cursor: pointer;
+			font-weight: 600;
+
+		}
+	}
+`;
+export const ButtonSelect = styled.button`
+	width: 100%;
+	height: 5.6rem;
+	cursor: pointer;
+	margin-top: 0.8rem;
+	border-radius: 0.8rem;
+	background-color: var(--color-input-background);
+	border: solid 1px var(--color-line-in-white);
+	outline: 0;
+	padding: 0 1.6rem;
+	font: 1.6rem Archivo;
+	transition: all 0.2s;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	&:disabled {
+		opacity: 0.7;
+		cursor: default;
+		& svg {
+			opacity: 0.7;
+		}
+		&:hover {
+			& svg {
+				opacity: 0.7;
+			}
+			opacity: 0.7;
+		}
+	}
+	& svg {
+		opacity: 0.5;
+	}
+	& span {
+		color: var(--color-text-complement);
+	}
+	& .open {
+		transform: rotate(180deg);
+	}
+	&:hover > svg {
+		opacity: 1;
+	}
+`;
