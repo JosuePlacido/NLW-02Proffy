@@ -1,26 +1,25 @@
-import{Request,Response} from 'express';
-import converHourToMinutes, { converMinutestoHour } from '../utils/converHourToMinutes';
-import db from '../database/connection';
-import ClassDAO from '../database/dao/classes';
-import { ScheduleItem} from '.././models/class_schedule';
-import {Class} from '.././models/class';
-import ClassScheduleDAO from '../database/dao/class_schedule';
+import { Request, Response } from "express";
+import converHourToMinutes, {
+	converMinutestoHour,
+} from "../utils/converHourToMinutes";
+import db from "../database/connection";
+import ClassDAO from "../database/dao/classes";
+import { ScheduleItem } from ".././models/class_schedule";
+import { Class } from ".././models/class";
+import ClassScheduleDAO from "../database/dao/class_schedule";
 export default class ClassesController {
 	async create(request: Request, response: Response) {
-		const {
-			subject,
-			cost,
-			schedule,
-			userId
-		} = request.body;
+		const { subject, cost, schedule, userId } = request.body;
 
 		const trx = await db.transaction();
 		try {
-			const insertedClassesIds = await trx("classes").insert({
-				subject,
-				cost,
-				userId,
-			});
+			const insertedClassesIds = await trx("classes")
+				.insert({
+					subject,
+					cost,
+					userId,
+				})
+				.returning("id");
 
 			const class_schedule = schedule.map((si: ScheduleItem) => {
 				return {
@@ -43,15 +42,17 @@ export default class ClassesController {
 	async getClass(request: Request, response: Response) {
 		const filters = request.query;
 		const id = filters.id as string;
-		if(!id){
+		if (!id) {
 			return response.json([]);
 		}
-		let classes = await new ClassDAO().getAllByUser(parseInt(id)) as Class[];
+		let classes = (await new ClassDAO().getAllByUser(
+			parseInt(id)
+		)) as Class[];
 
-		for(let x=0; x < classes.length;x++){
-			classes[x].schedules = await new ClassScheduleDAO().getAllByClass(
+		for (let x = 0; x < classes.length; x++) {
+			classes[x].schedules = (await new ClassScheduleDAO().getAllByClass(
 				classes[x].id
-			) as ScheduleItem[];
+			)) as ScheduleItem[];
 		}
 		return response.json(classes);
 	}
@@ -71,14 +72,14 @@ export default class ClassesController {
 			.whereExists(function () {
 				this.select("class_schedule.*")
 					.from("class_schedule")
-					.whereRaw("`class_schedule`.`classId` = `classes`.`id`")
-					.whereRaw("`class_schedule`.`week_day` = ??", [
+					.whereRaw("class_schedule.classId = classes.id")
+					.whereRaw("class_schedule.week_day = ??", [
 						Number(week_day),
 					])
-					.whereRaw("`class_schedule`.`from` <= ??", [
+					.whereRaw("class_schedule.from <= ??", [
 						Number(timeInMinutes),
 					])
-					.whereRaw("`class_schedule`.`to` > ??", [
+					.whereRaw("class_schedule.to > ??", [
 						Number(timeInMinutes),
 					]);
 			})
@@ -92,12 +93,12 @@ export default class ClassesController {
 				"users.bio",
 				"users.whatsapp",
 			])
-			.limit(page?10:-1)
-			.offset(1*(page?parseInt(page):0));
-			const dao = new ClassScheduleDAO();
-			for(let x=0;x < classes.length;x++){
-				classes[x].schedules = await dao.getAllByClass(classes[x].id);
-			}
+			.limit(page ? 10 : -1)
+			.offset(1 * (page ? parseInt(page) : 0));
+		const dao = new ClassScheduleDAO();
+		for (let x = 0; x < classes.length; x++) {
+			classes[x].schedules = await dao.getAllByClass(classes[x].id);
+		}
 		return response.json(classes);
 	}
 }

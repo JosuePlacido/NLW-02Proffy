@@ -1,32 +1,37 @@
-import db from '../connection';
-import User,{ UserUpdate} from '../../models/user';
-import bcrypt from 'bcrypt';
-import { string, object } from 'yup';
-import converHourToMinutes from '../../utils/converHourToMinutes';
+import db from "../connection";
+import User, { UserUpdate } from "../../models/user";
+import bcrypt from "bcrypt";
+import { string, object } from "yup";
+import converHourToMinutes from "../../utils/converHourToMinutes";
 
-let yup = require('yup');
+let yup = require("yup");
 export default class UserDAO {
 	async create(user: User) {
 		const hash = await this.hashPassword(user.password);
 		user.password = hash;
-		await db("users").insert(user);
+		const id = await db("users").insert(user).returning("id");
 		return {
-			id: user.id,
+			id: id[0],
 			name: user.name,
 			surname: user.surname,
 			email: user.email,
 		};
 	}
-	async update({id,bio,avatar,whatsapp,subjects}: UserUpdate,trx:any) {
+	async update(
+		{ id, bio, avatar, whatsapp, subjects }: UserUpdate,
+		trx: any
+	) {
 		if (trx) {
-			return await trx('users')
-			.where("id", "=", id)
-			.update({
-				avatar,
-				bio,
-				whatsapp: whatsapp.replace(/\D/g, ""),
-			}, 'id');
-
+			return await trx("users")
+				.where("id", "=", id)
+				.update(
+					{
+						avatar,
+						bio,
+						whatsapp: whatsapp.replace(/\D/g, ""),
+					},
+					"id"
+				);
 		}
 		return await db("users")
 			.where("id", "=", id)
@@ -57,7 +62,7 @@ export default class UserDAO {
 			.isValid(user);
 	}
 	async validateUpdate(user: UserUpdate) {
-		if (await db("users").where("id", user.id).first() == undefined) {
+		if ((await db("users").where("id", user.id).first()) == undefined) {
 			return false;
 		}
 		return await yup
